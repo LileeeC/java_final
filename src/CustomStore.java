@@ -7,38 +7,36 @@ import java.awt.event.ActionListener;
 
 public class CustomStore {
     private static void createAndShowGUI() {
-        JFrame frame = new JFrame("選擇、新增店家");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        DataStore.CustomStorePage = new JFrame("選擇、新增店家");
+        DataStore.CustomStorePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        DataStore.CustomStorePage.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        DataStore.CustomStorePage.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
         JButton addButton = createCustomButton("新增店家");
-        frame.add(addButton);
+        DataStore.CustomStorePage.add(addButton);
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String buttonName = JOptionPane.showInputDialog(frame, "輸入店家名稱: ");
+                String buttonName = JOptionPane.showInputDialog(DataStore.CustomStorePage, "輸入店家名稱: ");
 
-                if (buttonName != null && !buttonName.trim().isEmpty()) {
+                if (buttonName != null && !buttonName.trim().isEmpty() && !DataStore.StoresName.contains(buttonName)) {
                     JButton newButton = createCustomButton(buttonName);
-                    frame.add(newButton);
-
-                    // 刷新 JFrame 以显示新按钮
-                    frame.revalidate();
-                    frame.repaint();
+                    DataStore.StoresName.add(buttonName);
+                    DataStore.CustomStorePage.add(newButton);
+                    DataStore.CustomStorePage.revalidate();
+                    DataStore.CustomStorePage.repaint();
                 } else if (buttonName == null) {
                     // 用户点击了取消，什么都不做
                 } else {
-                    // 用户输入了空值，显示错误信息
-                    JOptionPane.showMessageDialog(frame, "店面名稱不能空白", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(DataStore.CustomStorePage, "店面名稱不能空白或重複", "錯誤",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        // 显示 JFrame
-        frame.setVisible(true);
+        DataStore.CustomStorePage.setVisible(true);
     }
 
     private static JButton createCustomButton(String text) {
