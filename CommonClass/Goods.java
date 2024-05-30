@@ -16,7 +16,6 @@ public class Goods {
     cost = 0;
   }
 
-
   Goods(ArrayList<Material> materials, int number, int price, int cost) {
     this.materials = materials;
     this.number = number;
