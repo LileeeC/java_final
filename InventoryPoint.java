@@ -1,8 +1,19 @@
 import java.util.*;
 
 public class InventoryPoint{
-    private int id;
-    private String place;
-    private String location;
-    private List<InventoryItem> items;
+    public int id;
+    public String location;
+    public ArrayList<InventoryItem> items;
+
+    InventoryPoint() {
+        id = 0;
+        location = "";
+        items = new ArrayList<InventoryItem>();
+    }
+    
+    InventoryPoint(int id, String location, ArrayList<InventoryItem> items) {
+        this.id = id;
+        this.location = location;
+        this.items = items;
+    }
 }
