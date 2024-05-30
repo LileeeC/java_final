@@ -1,19 +1,23 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Goods {
+  public String name;
   public ArrayList<String> materials;
   public int number;
   public int price;
   public int cost;
 
   Goods() {
-    materials = new ArrayList<>();
+    name = "商品";
+    materials = new ArrayList<>(Arrays.asList("蘋果", "香蕉"));
     number = 0;
     price = 0;
     cost = 0;
   }
 
-  Goods(ArrayList<String> materials, int number, int price, int cost) {
+  Goods(String name, ArrayList<String> materials, int number, int price, int cost) {
+    this.name = name;
     this.materials = materials;
     this.number = number;
     this.price = price;
