@@ -53,7 +53,7 @@ public class CustomStore {
         DataStore.CustomStorePage.setVisible(true);
     }
 
-    private static JButton createCustomButton(String text) {
+    public static JButton createCustomButton(String text) {
         JButton button = new JButton(text);
 
         button.setPreferredSize(new Dimension(300, 200));

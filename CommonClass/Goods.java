@@ -1,23 +1,23 @@
+package CommonClass;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Goods {
-  public String name;
-  public ArrayList<String> materials;
+  public ArrayList<Material> materials;
   public int number;
   public int price;
   public int cost;
 
   Goods() {
-    name = "商品";
-    materials = new ArrayList<>(Arrays.asList("蘋果", "香蕉"));
+    materials = new ArrayList<Material>();
     number = 0;
     price = 0;
     cost = 0;
   }
 
-  Goods(String name, ArrayList<String> materials, int number, int price, int cost) {
-    this.name = name;
+
+  Goods(ArrayList<Material> materials, int number, int price, int cost) {
     this.materials = materials;
     this.number = number;
     this.price = price;
