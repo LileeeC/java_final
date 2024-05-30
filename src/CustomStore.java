@@ -1,9 +1,11 @@
+package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CustomStoreName {
+public class CustomStore {
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("選擇、新增店家");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
