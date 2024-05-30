@@ -22,13 +22,24 @@ public class CustomStore {
                 String buttonName = JOptionPane.showInputDialog(DataStore.CustomStorePage, "輸入店家名稱: ");
 
                 if (buttonName != null && !buttonName.trim().isEmpty() && !DataStore.StoresName.contains(buttonName)) {
-                    JButton newButton = createCustomButton(buttonName);
-                    DataStore.StoresName.add(buttonName);
-                    DataStore.CustomStorePage.add(newButton);
+                    DataStore.Store store = new DataStore.Store();
+                    store.ButtonTrigger = createCustomButton(buttonName);
+                    store.StoreName = buttonName;
+                    DataStore.StoresName.add(store.StoreName);
+                    DataStore.Stores.put(buttonName, store);
+                    DataStore.CustomStorePage.add(store.ButtonTrigger);
+                    store.ButtonTrigger.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            JButton clickedButton = (JButton) e.getSource();
+                            DataStore.CustomStorePage.setVisible(false);
+                            DataStore.StorePage.setTitle(clickedButton.getText());
+                            DataStore.StorePage.setVisible(true);
+                        }
+                    });
                     DataStore.CustomStorePage.revalidate();
                     DataStore.CustomStorePage.repaint();
                 } else if (buttonName == null) {
-                    // 用户点击了取消，什么都不做
                 } else {
                     JOptionPane.showMessageDialog(DataStore.CustomStorePage, "店面名稱不能空白或重複", "錯誤",
                             JOptionPane.ERROR_MESSAGE);
@@ -70,6 +81,6 @@ public class CustomStore {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> createAndShowGUI());
+        createAndShowGUI();
     }
 }
