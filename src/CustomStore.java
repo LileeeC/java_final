@@ -10,12 +10,11 @@ public class CustomStore {
         DataStore.CustomStorePage = new JFrame("選擇、新增店家");
         DataStore.CustomStorePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         DataStore.CustomStorePage.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        
         // 主容器面板
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.LEFT, 150, 30));
-        // DataStore.CustomStorePage.setLayout(new FlowLayout(FlowLayout.LEFT, 150,
-        // 50));
+        //DataStore.CustomStorePage.setLayout(new FlowLayout(FlowLayout.LEFT, 150, 50));
 
         JButton addButton = createCustomButton("新增店家");
         DataStore.CustomStorePage.add(addButton);
