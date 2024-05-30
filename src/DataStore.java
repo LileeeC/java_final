@@ -1,6 +1,6 @@
 package src;
 
-import java.awt.Button;
+import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import CommonClass.*;
 
 public class DataStore {
     public static JFrame CustomStorePage;
@@ -19,6 +20,18 @@ public class DataStore {
         StorePage = new JFrame();
         StorePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StorePage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        StorePage.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        JButton addButton = CustomStore.createCustomButton("剩餘商品");
+        StorePage.add(addButton);
+        addButton = CustomStore.createCustomButton("材料庫存");
+        StorePage.add(addButton);
+        addButton = CustomStore.createCustomButton("財務報表");
+        StorePage.add(addButton);
+        
+        StorePage.revalidate();
+        StorePage.repaint();
+
         StorePage.setVisible(false);
         CustomStore.main(null);
     }
@@ -31,15 +44,5 @@ public class DataStore {
         public String StoreName;
         public JButton ButtonTrigger;
         public Goods[] GoodsList;
-    }
-
-    public static class Goods {
-        public Material[] materials;
-        public int prices;
-    }
-
-    public static class Material {
-        public String name;
-        public float number;
     }
 }
