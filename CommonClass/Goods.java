@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Goods {
+  public String name;
   public ArrayList<Material> materials;
   public int number;
   public int price;
   public int cost;
 
-  Goods() {
+  public Goods() {
     materials = new ArrayList<Material>();
     number = 0;
     price = 0;

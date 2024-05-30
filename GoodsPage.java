@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import CommonClass.Goods;
+
 import java.awt.*;
 import java.util.ArrayList;
 
