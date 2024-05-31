@@ -1,20 +1,30 @@
 package src;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.*;
 import javax.swing.*;
-
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import CommonClass.*;
+import Pages.*;
 
-public class DataStore implements ActionListener {
-    public static JFrame mainFrame;
-    public static Set<String> storesName = new HashSet<>();
-    public static Map<String, Store> stores = new HashMap<>();
+public class DataStore {
+    public static JFrame MainFrame;
+    public static Set<String> StoresName = new HashSet<>();
+    public static Map<String, Store> Stores = new HashMap();
 
     private CardLayout cardLayout;
     private JPanel cardPanel;
@@ -22,6 +32,21 @@ public class DataStore implements ActionListener {
     private JPanel goodsPagePanel;
     private JPanel inventoryPagePanel;
     private JPanel financeReportPanel;
+
+    private DataStore() {
+        MainFrame = new JFrame();
+        MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        MainFrame.setLayout(new CardLayout());
+
+        JPanel MainPanel = new JPanel(new CardLayout());
+
+        MainFrame.revalidate();
+        MainFrame.repaint();
+
+        MainFrame.setVisible(false);
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new DataStore().createAndShowGUI());
