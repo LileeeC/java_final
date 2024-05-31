@@ -1,27 +1,14 @@
 package src;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import CommonClass.*;
 import Pages.*;
 
-public class DataStore {
+public class DataStore implements ActionListener{
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap();
@@ -38,29 +25,12 @@ public class DataStore {
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        MainFrame.setLayout(new CardLayout());
-
-        JPanel MainPanel = new JPanel(new CardLayout());
-
-        MainFrame.revalidate();
-        MainFrame.repaint();
-
-        MainFrame.setVisible(false);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new DataStore().createAndShowGUI());
-    }
-
-    private void createAndShowGUI() {
-        mainFrame = new JFrame("店面經營系統");
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainFrame.setLayout(new BorderLayout());
+        MainFrame.setLayout(new BorderLayout());
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+        // Add initial page's button
         mainMenuPanel = createMainMenuPanel();
         cardPanel.add(mainMenuPanel, "Main Menu");
 
@@ -69,8 +39,14 @@ public class DataStore {
         inventoryPagePanel = createInventoryPagePanel();
         financeReportPanel = createFinanceReportPanel();
 
-        mainFrame.add(cardPanel, BorderLayout.CENTER);
-        mainFrame.setVisible(true);
+        MainFrame.add(cardPanel, BorderLayout.CENTER);
+        MainFrame.setVisible(true);
+        MainFrame.revalidate();
+        MainFrame.repaint();
+    }
+
+    public static void main(String[] args) {
+        new DataStore();
     }
 
     private JPanel createMainMenuPanel() {
@@ -82,14 +58,14 @@ public class DataStore {
         addStoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String buttonName = JOptionPane.showInputDialog(mainFrame, "輸入店家名稱: ");
+                String buttonName = JOptionPane.showInputDialog(MainFrame, "輸入店家名稱: ");
 
-                if (buttonName != null && !buttonName.trim().isEmpty() && !storesName.contains(buttonName)) {
+                if (buttonName != null && !buttonName.trim().isEmpty() && !StoresName.contains(buttonName)) {
                     Store store = new Store();
                     store.ButtonTrigger = createCustomButton(buttonName);
                     store.StoreName = buttonName;
-                    storesName.add(store.StoreName);
-                    stores.put(buttonName, store);
+                    StoresName.add(store.StoreName);
+                    Stores.put(buttonName, store);
                     panel.add(store.ButtonTrigger);
                     store.ButtonTrigger.addActionListener(new ActionListener() {
                         @Override
@@ -101,7 +77,7 @@ public class DataStore {
                     panel.revalidate();
                     panel.repaint();
                 } else if (buttonName != null) {
-                    JOptionPane.showMessageDialog(mainFrame, "店面名稱不能空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MainFrame, "店面名稱不能空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -202,7 +178,7 @@ public class DataStore {
     }
 
     private void showStoreMenu(String storeName) {
-        mainFrame.setTitle(storeName);
+        MainFrame.setTitle(storeName);
         cardPanel.add(createStoreMenuPanel(), "Store Menu");
         cardLayout.show(cardPanel, "Store Menu");
     }
@@ -256,11 +232,5 @@ public class DataStore {
         } else if ("Finance Report".equals(command)) {
             showFinanceReportPage();
         }
-    }
-
-    public static class Store {
-        public String StoreName;
-        public JButton ButtonTrigger;
-        public Goods[] GoodsList;
     }
 }
