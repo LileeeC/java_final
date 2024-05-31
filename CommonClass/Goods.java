@@ -1,7 +1,6 @@
 package CommonClass;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Goods {
   public String name;
