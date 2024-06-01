@@ -7,13 +7,16 @@ import CommonClass.Goods;
 import CommonClass.Material;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.*;
 
-public class GoodsPage {
+public class GoodsPage implements ActionListener {
   public static JPanel createGoodsPagePanel() {
     JPanel panel = new JPanel(new GridBagLayout());
+    GoodsPage goodsPage = new GoodsPage();
 
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(10, 10, 10, 10);
@@ -36,6 +39,11 @@ public class GoodsPage {
         y = 1; // 重置为第二行
       }
     }
+
+    JButton storeMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
+    storeMenuButton.addActionListener(goodsPage);
+    storeMenuButton.setActionCommand("Store Menu");
+    panel.add(storeMenuButton);
 
     return panel;
   }
@@ -68,5 +76,14 @@ public class GoodsPage {
     costLabel.setFont(new Font("Serif", Font.PLAIN, 20));
     gbc.gridy = ++y;
     panel.add(costLabel, gbc);
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    String command = e.getActionCommand();
+
+    if ("Store Menu".equals(command)) {
+      DataStore.showStoreMenu(command);
+    }
   }
 }

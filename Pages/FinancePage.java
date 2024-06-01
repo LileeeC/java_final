@@ -11,24 +11,27 @@ import javax.swing.JPanel;
 
 import src.DataStore;
 
-public class FinancePage {
+public class FinancePage implements ActionListener {
     public static JPanel createFinanceReportPanel() {
         JPanel panel = new JPanel();
         panel.add(new JLabel("財務報表頁面"));
 
-        // JButton mainMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
-        // mainMenuButton.addActionListener(storePage);
-        // mainMenuButton.setActionCommand("Store Menu");
+        FinancePage financePage = new FinancePage();
+
+        JButton storeMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
+        storeMenuButton.addActionListener(financePage);
+        storeMenuButton.setActionCommand("Store Menu");
+        panel.add(storeMenuButton);
 
         return panel;
     }
 
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    //     String command = e.getActionCommand();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
 
-    //     if ("Store Menu".equals(command)) {
-    //         DataStore.showStoreMenu(command);
-    //     }
-    // }
+        if ("Store Menu".equals(command)) {
+            DataStore.showStoreMenu(command);
+        }
+    }
 }
