@@ -21,15 +21,14 @@
 5. 財務圖表：各品項收入、當日收入、當月收入
 
 ### 程式碼架構
-- CommonClass
+**CommonClass 放屬性**
 - material
 - goods
 - store
-- inventory
-
-### Pages
-- 設定Panel
-
-### DataStore
+- inventory point
+- inventory item
+**Pages**
+- 設定各自Panel的長相
+**DataStore**
 - 執行動作
 - 放大家共同使用的東西

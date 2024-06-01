@@ -1,3 +1,4 @@
+//attribute of goods
 package CommonClass;
 
 import java.util.ArrayList;

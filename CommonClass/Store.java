@@ -1,3 +1,4 @@
+//attributes of store
 package CommonClass;
 
 import javax.swing.JButton;

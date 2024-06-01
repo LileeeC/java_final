@@ -1,3 +1,4 @@
+//the look of inventory page
 package Pages;
 
 import javax.swing.JLabel;
