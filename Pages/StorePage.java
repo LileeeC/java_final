@@ -16,7 +16,7 @@ public class StorePage implements ActionListener {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
         StorePage storePage = new StorePage();
 
-        JButton mainMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
+        JButton mainMenuButton = DataStore.createCustomButton("主選單");
         mainMenuButton.addActionListener(storePage);
         mainMenuButton.setActionCommand("Main Menu");
 

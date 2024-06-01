@@ -2,9 +2,12 @@
 package Pages;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,8 +26,17 @@ public class GoodsPage implements ActionListener{
   public static JPanel createGoodsPagePanel() {
     GoodsPage goodsPage = new GoodsPage();
     JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
+    //panel.setPreferredSize(new Dimension(400, 500));
 
+    
 
+    //back button
+    JButton storeMenuButton = DataStore.createCustomButton("返回");
+    storeMenuButton.addActionListener(goodsPage);
+    storeMenuButton.setActionCommand("Store Menu");
+    panel.add(storeMenuButton);
+
+    //addgoodsbutton
     JButton addGoodsButton = src.DataStore.createCustomButton("新增商品");
     panel.add(addGoodsButton);
 
@@ -78,11 +90,6 @@ public class GoodsPage implements ActionListener{
   //       y = 1; // 重置为第二行
   //     }
   //   }
-
-    JButton storeMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
-    storeMenuButton.addActionListener(goodsPage);
-    storeMenuButton.setActionCommand("Store Menu");
-    panel.add(storeMenuButton);
 
     return panel;
   }

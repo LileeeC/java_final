@@ -4,6 +4,8 @@ package src;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.*;
 import javax.swing.*;
 import CommonClass.*;
@@ -30,9 +32,29 @@ public class DataStore {
         MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         MainFrame.setLayout(new BorderLayout());
+        //MainFrame.setBounds(0, 0, 300, (int)Double.POSITIVE_INFINITY);
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+
+        //scroll bar
+        JScrollPane scroll = new JScrollPane(cardPanel);       
+        scroll.setLayout(new ScrollPaneLayout());                                 
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.getViewport().addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // 取viewport的大小用來設定
+                Dimension size = scroll.getViewport().getSize();
+                cardPanel.setPreferredSize(new Dimension(size.width, 8000));
+                cardPanel.revalidate();
+            }
+        });
+        scroll.setEnabled(true);
+        //DataStore.MainFrame.getContentPane().add(scroll, BorderLayout.CENTER);
+        DataStore.MainFrame.add(scroll, BorderLayout.CENTER);
+        scroll.setVisible(true);
 
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
@@ -49,7 +71,7 @@ public class DataStore {
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
         
-        MainFrame.add(cardPanel, BorderLayout.CENTER);
+        //MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
         MainFrame.revalidate();
         MainFrame.repaint();
@@ -107,4 +129,6 @@ public class DataStore {
 
         return button;
     }
+
+    //設定其他的createCustomButton
 }
