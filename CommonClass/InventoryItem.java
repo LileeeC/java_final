@@ -1,3 +1,4 @@
+//attributes of inventory items
 package CommonClass;
 
 import java.util.HashMap;

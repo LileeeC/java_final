@@ -1,3 +1,4 @@
+//the look of goods page
 package Pages;
 
 import javax.swing.*;
