@@ -4,6 +4,11 @@ package Pages;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import java.awt.Component;
+import java.awt.Container;
+
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +18,37 @@ import src.*;
 
 public class MainMenu {
     public static JPanel createMainMenuPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 100));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 100)) {
+            @Override
+            public Dimension getPreferredSize() {
+                Container parent = getParent();
+                if (parent != null && parent.getWidth() > 0) {
+                    int parentWidth = parent.getWidth();
+                    int width = 0;
+                    int height = 0;
+                    int rowWidth = 0;
+                    int rowHeight = 0;
+
+                    for (Component comp : getComponents()) {
+                        Dimension compSize = comp.getPreferredSize();
+                        if (rowWidth + compSize.width + 150 > parentWidth) {
+                            width = Math.max(width, rowWidth);
+                            height += rowHeight + 100; // 10 is the vertical gap
+                            rowWidth = compSize.width;
+                            rowHeight = compSize.height;
+                        } else {
+                            rowWidth += compSize.width + 150; // 10 is the horizontal gap
+                            rowHeight = Math.max(rowHeight, compSize.height + 100);
+                        }
+                    }
+
+                    width = Math.max(width, rowWidth);
+                    height += rowHeight;
+                    return new Dimension(width, height);
+                }
+                return super.getPreferredSize();
+            }
+        };
 
         JButton addStoreButton = src.DataStore.createCustomButton("新增店家");
         panel.add(addStoreButton);
