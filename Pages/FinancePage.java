@@ -13,7 +13,7 @@ import src.DataStore;
 
 public class FinancePage implements ActionListener {
     public static JPanel createFinanceReportPanel() {
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
         panel.add(new JLabel("財務報表頁面"));
 
         FinancePage financePage = new FinancePage();

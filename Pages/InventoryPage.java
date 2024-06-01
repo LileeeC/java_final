@@ -1,6 +1,7 @@
 //the look of inventory page
 package Pages;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +13,7 @@ import src.DataStore;
 
 public class InventoryPage implements ActionListener {
     public static JPanel createInventoryPagePanel() {
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
         panel.add(new JLabel("材料庫存頁面"));
 
         InventoryPage inventoryPage = new InventoryPage();

@@ -66,6 +66,12 @@ public class DataStore {
         goodsPagePanel = GoodsPage.createGoodsPagePanel();
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
+
+        cardPanel.add(storePagePanel, "Store Menu");
+        cardPanel.add(goodsPagePanel, "Goods Page");
+        cardPanel.add(inventoryPagePanel, "Inventory Page");
+        cardPanel.add(financeReportPanel, "Finance Report");
+        
         storePagePanel.setBackground(Color.LIGHT_GRAY);
         goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
@@ -82,28 +88,28 @@ public class DataStore {
     }
 
     public static void showMainMenu(String storeName) {
-        cardPanel.add(mainMenuPanel, "Main Menu");
+        // cardPanel.add(mainMenuPanel, "Main Menu");
         cardLayout.show(cardPanel, "Main Menu");
     }
 
     public static void showStoreMenu(String storeName) {
         MainFrame.setTitle(storeName);
-        cardPanel.add(storePagePanel, "Store Menu");
+        // cardPanel.add(storePagePanel, "Store Menu");
         cardLayout.show(cardPanel, "Store Menu");
     }
 
     public static void showGoodsPage() {
-        cardPanel.add(goodsPagePanel, "Goods Page");
+        // cardPanel.add(goodsPagePanel, "Goods Page");
         cardLayout.show(cardPanel, "Goods Page");
     }
 
     public static void showInventoryPage() {
-        cardPanel.add(inventoryPagePanel, "Inventory Page");
+        // cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
     }
 
     public static void showFinanceReportPage() {
-        cardPanel.add(financeReportPanel, "Finance Report");
+        // cardPanel.add(financeReportPanel, "Finance Report");
         cardLayout.show(cardPanel, "Finance Report");
     }
 
