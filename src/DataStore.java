@@ -20,6 +20,7 @@ public class DataStore {
     private static JPanel goodsPagePanel;
     private static JPanel inventoryPagePanel;
     private static JPanel financeReportPanel;
+    private static JPanel storePagePanel;
 
     private DataStore() {
         MainFrame = new JFrame();
@@ -40,6 +41,7 @@ public class DataStore {
         goodsPagePanel = GoodsPage.createGoodsPagePanel();
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
+        storePagePanel = StorePage.createStoreMenuPanel();
 
         MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
@@ -58,7 +60,7 @@ public class DataStore {
 
     public static void showStoreMenu(String storeName) {
         MainFrame.setTitle(storeName);
-        cardPanel.add(StorePage.createStoreMenuPanel(), "Store Menu");
+        cardPanel.add(storePagePanel, "Store Menu");
         cardLayout.show(cardPanel, "Store Menu");
     }
 
