@@ -1,3 +1,5 @@
+package Pages;
+
 import javax.swing.*;
 
 import CommonClass.Goods;
@@ -6,9 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GoodsPage {
-  private static void createAndShowGUI() { // 確保一個漂亮的外觀風格JFrame . setDefaultLookAndFeelDecorated ( true );
+  public static JFrame frame;
+
+  public static void createAndShowGUI() { // 確保一個漂亮的外觀風格JFrame . setDefaultLookAndFeelDecorated ( true );
     // 建立及設定視窗
-    JFrame frame = new JFrame("店面經營系統");
+    frame = new JFrame("店面經營系統");
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -16,7 +20,6 @@ public class GoodsPage {
     frame.setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(10, 10, 10, 10); // 设置内边距
-    
 
     JLabel label = new JLabel("商品列表");
     label.setBounds(50, 50, 200, 30);
@@ -81,14 +84,5 @@ public class GoodsPage {
     }
 
     frame.setVisible(true);
-  }
-
-  public static void main(String[] args) { // 顯示應用程式GUI
-    javax.swing.SwingUtilities.invokeLater(
-        new Runnable() {
-          public void run() {
-            createAndShowGUI();
-          }
-        });
   }
 }
