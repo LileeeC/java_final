@@ -7,6 +7,6 @@ public class InventoryItem {
     public Map<String, Float> quantities;
 
     InventoryItem() {
-        quantities = new HashMap();
+        quantities = new HashMap<>();
     }
 }
