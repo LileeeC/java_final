@@ -19,12 +19,12 @@ public class DataStore {
     public static Map<String, Goods> Goods = new HashMap<>();
 
     private static CardLayout cardLayout;
-    private static JPanel cardPanel;
-    private static JPanel mainMenuPanel;
-    private static JPanel goodsPagePanel;
-    private static JPanel inventoryPagePanel;
-    private static JPanel financeReportPanel;
-    private static JPanel storePagePanel;
+    public static JPanel cardPanel;
+    public static JPanel mainMenuPanel;
+    public static JPanel goodsPagePanel;
+    public static JPanel inventoryPagePanel;
+    public static JPanel financeReportPanel;
+    public static JPanel storePagePanel;
 
     private DataStore() {
         MainFrame = new JFrame();
@@ -32,29 +32,17 @@ public class DataStore {
         MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         MainFrame.setLayout(new BorderLayout());
-        //MainFrame.setBounds(0, 0, 300, (int)Double.POSITIVE_INFINITY);
+        // MainFrame.setBounds(0, 0, 300, (int)Double.POSITIVE_INFINITY);
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
-        //scroll bar
-        JScrollPane scroll = new JScrollPane(cardPanel);       
-        scroll.setLayout(new ScrollPaneLayout());                                 
+        // scroll bar
+        JScrollPane scroll = new JScrollPane(cardPanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.getViewport().addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // 取viewport的大小用來設定
-                Dimension size = scroll.getViewport().getSize();
-                cardPanel.setPreferredSize(new Dimension(size.width, 8000));
-                cardPanel.revalidate();
-            }
-        });
-        scroll.setEnabled(true);
-        //DataStore.MainFrame.getContentPane().add(scroll, BorderLayout.CENTER);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
         DataStore.MainFrame.add(scroll, BorderLayout.CENTER);
-        scroll.setVisible(true);
 
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
@@ -71,13 +59,13 @@ public class DataStore {
         cardPanel.add(goodsPagePanel, "Goods Page");
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardPanel.add(financeReportPanel, "Finance Report");
-        
+
         storePagePanel.setBackground(Color.LIGHT_GRAY);
         goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
-        
-        //MainFrame.add(cardPanel, BorderLayout.CENTER);
+
+        // MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
         MainFrame.revalidate();
         MainFrame.repaint();
@@ -136,5 +124,5 @@ public class DataStore {
         return button;
     }
 
-    //設定其他的createCustomButton
+    // 設定其他的createCustomButton
 }
