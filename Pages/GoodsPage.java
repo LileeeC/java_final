@@ -8,9 +8,9 @@ import CommonClass.Material;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GoodsPage {
-  public static JFrame frame;
+import src.*;
 
+public class GoodsPage {
   public static JPanel createGoodsPagePanel() {
     JPanel panel = new JPanel(new GridBagLayout());
 
@@ -30,49 +30,6 @@ public class GoodsPage {
     for (Goods currentGoods : goods) {
       addGoodsToPanel(panel, gbc, currentGoods, x, y);
       y += 5; // 每个商品占用五行
-
-      // goods name
-      JLabel nameLabel = new JLabel("商品名稱：" + currentGoods.name);
-      nameLabel.setFont(new Font("Serif", Font.PLAIN, 24));
-      gbc.gridx = x;
-      gbc.gridy = y;
-      frame.add(nameLabel, gbc);
-      y++;
-
-      // goods materials
-      for (int j = 0; j < currentGoods.materials.size(); j++) {
-        JLabel materialLabel = new JLabel(
-            "材料：" + currentGoods.materials.get(j).name + " 所需數量：" + currentGoods.materials.get(j).number);
-        materialLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-        gbc.gridx = x;
-        gbc.gridy = y;
-        frame.add(materialLabel, gbc);
-        y++;
-      }
-
-      // goods number
-      JLabel numberLabel = new JLabel("數量：" + currentGoods.number);
-      numberLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-      gbc.gridx = x;
-      gbc.gridy = y;
-      frame.add(numberLabel, gbc);
-      y++;
-
-      // goods price
-      JLabel priceLabel = new JLabel("價格：" + currentGoods.price);
-      priceLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-      gbc.gridx = x;
-      gbc.gridy = y;
-      frame.add(priceLabel, gbc);
-      y++;
-
-      // goods cost
-      JLabel costLabel = new JLabel("成本：" + currentGoods.cost);
-      costLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-      gbc.gridx = x;
-      gbc.gridy = y;
-      frame.add(costLabel, gbc);
-      y++;
 
       if (y > 10) {
         x++;
