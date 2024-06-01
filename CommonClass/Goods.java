@@ -10,13 +10,15 @@ public class Goods {
   public int cost;
 
   public Goods() {
+    name = "商品";
     materials = new ArrayList<Material>();
     number = 0;
     price = 0;
     cost = 0;
   }
 
-  Goods(ArrayList<Material> materials, int number, int price, int cost) {
+  Goods(String name, ArrayList<Material> materials, int number, int price, int cost) {
+    this.name = name;
     this.materials = materials;
     this.number = number;
     this.price = price;
