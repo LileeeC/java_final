@@ -13,14 +13,14 @@ import src.*;
 
 public class StorePage implements ActionListener {
     public static JPanel createStoreMenuPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 80, 100));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100));
         StorePage storePage = new StorePage();
 
         JButton mainMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
         mainMenuButton.addActionListener(storePage);
         mainMenuButton.setActionCommand("Main Menu");
 
-        JButton goodsPageButton = DataStore.createCustomButton("剩餘商品");
+        JButton goodsPageButton = DataStore.createCustomButton("商品列表");
         goodsPageButton.addActionListener(storePage);
         goodsPageButton.setActionCommand("Goods Page");
 

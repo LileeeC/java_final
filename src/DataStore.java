@@ -13,6 +13,8 @@ public class DataStore {
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
+    public static Set<String> GoodsName = new HashSet<>();
+    public static Map<String, Goods> Goods = new HashMap<>();
 
     private static CardLayout cardLayout;
     private static JPanel cardPanel;
@@ -38,11 +40,15 @@ public class DataStore {
         mainMenuPanel.setBackground(Color.LIGHT_GRAY);
 
         // Initialize other panels but don't add them yet
+        storePagePanel = StorePage.createStoreMenuPanel();
         goodsPagePanel = GoodsPage.createGoodsPagePanel();
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
-        storePagePanel = StorePage.createStoreMenuPanel();
-
+        storePagePanel.setBackground(Color.LIGHT_GRAY);
+        goodsPagePanel.setBackground(Color.LIGHT_GRAY);
+        inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
+        financeReportPanel.setBackground(Color.LIGHT_GRAY);
+        
         MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
         MainFrame.revalidate();

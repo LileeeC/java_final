@@ -3,12 +3,15 @@ package CommonClass;
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 public class Goods {
   public String name;
   public ArrayList<Material> materials;
   public int number;
   public int price;
   public int cost;
+  public JButton ButtonTrigger;
 
   public Goods() {
     name = "商品";
