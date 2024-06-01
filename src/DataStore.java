@@ -1,3 +1,4 @@
+//執行動作，以及放大家共同擁有的物件設定
 package src;
 
 import java.awt.*;
@@ -33,6 +34,7 @@ public class DataStore{
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
         cardPanel.add(mainMenuPanel, "Main Menu");
+        mainMenuPanel.setBackground(Color.LIGHT_GRAY);
 
         // Initialize other panels but don't add them yet
         goodsPagePanel = GoodsPage.createGoodsPagePanel();

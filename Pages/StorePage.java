@@ -1,3 +1,4 @@
+//the look of store page
 package Pages;
 
 import java.awt.FlowLayout;

@@ -1,3 +1,4 @@
+//the look of main menu
 package Pages;
 
 import javax.swing.JButton;

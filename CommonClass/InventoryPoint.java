@@ -1,3 +1,4 @@
+//attributes of inventory points
 package CommonClass;
 
 import java.util.*;

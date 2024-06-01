@@ -1,3 +1,4 @@
+//the look of finance page
 package Pages;
 
 import javax.swing.JLabel;

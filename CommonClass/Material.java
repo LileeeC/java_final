@@ -1,3 +1,4 @@
+//attributes of material
 package CommonClass;
 
 public class Material {
