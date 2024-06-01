@@ -30,7 +30,6 @@ public class GoodsPage {
     for (Goods currentGoods : goods) {
       addGoodsToPanel(panel, gbc, currentGoods, x, y);
       y += 5; // 每个商品占用五行
-
       if (y > 10) {
         x++;
         y = 1; // 重置为第二行

@@ -15,6 +15,15 @@ public class StorePage implements ActionListener {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         StorePage storePage = new StorePage();
 
+        JButton mainMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                this.actionPerformed(e);
+            }
+        });
+        mainMenuButton.setActionCommand("Store Menu");
+
         JButton goodsPageButton = DataStore.createCustomButton("剩餘商品");
         goodsPageButton.addActionListener(storePage);
         goodsPageButton.setActionCommand("Goods Page");
@@ -27,6 +36,7 @@ public class StorePage implements ActionListener {
         financeReportButton.addActionListener(storePage);
         financeReportButton.setActionCommand("Finance Report");
 
+        panel.add(mainMenuButton);
         panel.add(goodsPageButton);
         panel.add(inventoryPageButton);
         panel.add(financeReportButton);
@@ -44,6 +54,8 @@ public class StorePage implements ActionListener {
             DataStore.showInventoryPage();
         } else if ("Finance Report".equals(command)) {
             DataStore.showFinanceReportPage();
+        } else if ("Store Menu".equals(command)) {
+            DataStore.showStoreMenu(command);
         }
     }
 }
