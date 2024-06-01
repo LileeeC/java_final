@@ -11,7 +11,7 @@ import Pages.*;
 public class DataStore implements ActionListener{
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
-    public static Map<String, Store> Stores = new HashMap();
+    public static Map<String, Store> Stores = new HashMap<>();
 
     private CardLayout cardLayout;
     private JPanel cardPanel;

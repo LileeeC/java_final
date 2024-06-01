@@ -19,3 +19,17 @@
 3. 顯示商品的材料、數量、價格、成本
 4. 庫存地點名稱、庫存材料及數量、新增材料
 5. 財務圖表：各品項收入、當日收入、當月收入
+
+### 程式碼架構
+- CommonClass
+- material
+- goods
+- store
+- inventory
+
+### Pages
+- 設定Panel
+
+### DataStore
+- 執行動作
+- 放大家共同使用的東西
