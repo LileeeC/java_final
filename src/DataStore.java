@@ -4,6 +4,8 @@ package src;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.*;
 import javax.swing.*;
 import CommonClass.*;
@@ -13,6 +15,8 @@ public class DataStore {
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
+    public static Set<String> GoodsName = new HashSet<>();
+    public static Map<String, Goods> Goods = new HashMap<>();
 
     private static CardLayout cardLayout;
     private static JPanel cardPanel;
@@ -28,9 +32,29 @@ public class DataStore {
         MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         MainFrame.setLayout(new BorderLayout());
+        //MainFrame.setBounds(0, 0, 300, (int)Double.POSITIVE_INFINITY);
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+
+        //scroll bar
+        JScrollPane scroll = new JScrollPane(cardPanel);       
+        scroll.setLayout(new ScrollPaneLayout());                                 
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.getViewport().addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // 取viewport的大小用來設定
+                Dimension size = scroll.getViewport().getSize();
+                cardPanel.setPreferredSize(new Dimension(size.width, 8000));
+                cardPanel.revalidate();
+            }
+        });
+        scroll.setEnabled(true);
+        //DataStore.MainFrame.getContentPane().add(scroll, BorderLayout.CENTER);
+        DataStore.MainFrame.add(scroll, BorderLayout.CENTER);
+        scroll.setVisible(true);
 
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
@@ -38,12 +62,22 @@ public class DataStore {
         mainMenuPanel.setBackground(Color.LIGHT_GRAY);
 
         // Initialize other panels but don't add them yet
+        storePagePanel = StorePage.createStoreMenuPanel();
         goodsPagePanel = GoodsPage.createGoodsPagePanel();
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
-        storePagePanel = StorePage.createStoreMenuPanel();
 
-        MainFrame.add(cardPanel, BorderLayout.CENTER);
+        cardPanel.add(storePagePanel, "Store Menu");
+        cardPanel.add(goodsPagePanel, "Goods Page");
+        cardPanel.add(inventoryPagePanel, "Inventory Page");
+        cardPanel.add(financeReportPanel, "Finance Report");
+        
+        storePagePanel.setBackground(Color.LIGHT_GRAY);
+        goodsPagePanel.setBackground(Color.LIGHT_GRAY);
+        inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
+        financeReportPanel.setBackground(Color.LIGHT_GRAY);
+        
+        //MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
         MainFrame.revalidate();
         MainFrame.repaint();
@@ -54,28 +88,28 @@ public class DataStore {
     }
 
     public static void showMainMenu(String storeName) {
-        cardPanel.add(mainMenuPanel, "Main Menu");
+        // cardPanel.add(mainMenuPanel, "Main Menu");
         cardLayout.show(cardPanel, "Main Menu");
     }
 
     public static void showStoreMenu(String storeName) {
         MainFrame.setTitle(storeName);
-        cardPanel.add(storePagePanel, "Store Menu");
+        // cardPanel.add(storePagePanel, "Store Menu");
         cardLayout.show(cardPanel, "Store Menu");
     }
 
     public static void showGoodsPage() {
-        cardPanel.add(goodsPagePanel, "Goods Page");
+        // cardPanel.add(goodsPagePanel, "Goods Page");
         cardLayout.show(cardPanel, "Goods Page");
     }
 
     public static void showInventoryPage() {
-        cardPanel.add(inventoryPagePanel, "Inventory Page");
+        // cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
     }
 
     public static void showFinanceReportPage() {
-        cardPanel.add(financeReportPanel, "Finance Report");
+        // cardPanel.add(financeReportPanel, "Finance Report");
         cardLayout.show(cardPanel, "Finance Report");
     }
 
@@ -101,4 +135,6 @@ public class DataStore {
 
         return button;
     }
+
+    //設定其他的createCustomButton
 }
