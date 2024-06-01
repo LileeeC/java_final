@@ -8,14 +8,14 @@ import javax.swing.*;
 import CommonClass.*;
 import Pages.*;
 
-public class DataStore{
+public class DataStore {
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
 
     private static CardLayout cardLayout;
     private static JPanel cardPanel;
-    private JPanel mainMenuPanel;
+    private static JPanel mainMenuPanel;
     private static JPanel goodsPagePanel;
     private static JPanel inventoryPagePanel;
     private static JPanel financeReportPanel;
@@ -47,6 +47,11 @@ public class DataStore{
 
     public static void main(String[] args) {
         new DataStore();
+    }
+
+    public static void showMainMenu(String storeName) {
+        cardPanel.add(mainMenuPanel, "Main Menu");
+        cardLayout.show(cardPanel, "Main Menu");
     }
 
     public static void showStoreMenu(String storeName) {

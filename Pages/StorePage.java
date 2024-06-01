@@ -16,12 +16,7 @@ public class StorePage implements ActionListener {
         StorePage storePage = new StorePage();
 
         JButton mainMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
-        mainMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                this.actionPerformed(e);
-            }
-        });
+        mainMenuButton.addActionListener(storePage);
         mainMenuButton.setActionCommand("Store Menu");
 
         JButton goodsPageButton = DataStore.createCustomButton("剩餘商品");
@@ -55,7 +50,7 @@ public class StorePage implements ActionListener {
         } else if ("Finance Report".equals(command)) {
             DataStore.showFinanceReportPage();
         } else if ("Store Menu".equals(command)) {
-            DataStore.showStoreMenu(command);
+            DataStore.showMainMenu(command);
         }
     }
 }
