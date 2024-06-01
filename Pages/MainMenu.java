@@ -13,7 +13,7 @@ import src.*;
 
 public class MainMenu {
     public static JPanel createMainMenuPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 50));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 100));
 
         JButton addStoreButton = src.DataStore.createCustomButton("新增店家");
         panel.add(addStoreButton);
