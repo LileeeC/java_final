@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import CommonClass.Store;
 import src.*;
@@ -59,8 +60,10 @@ public class MainMenu {
                 String buttonName = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入店家名稱: ");
 
                 if (buttonName != null && !buttonName.trim().isEmpty() && !DataStore.StoresName.contains(buttonName)) {
+                    Database.insertStore(buttonName);
                     Store store = new Store();
                     JButton ButtonTrigger = DataStore.createCustomButton(buttonName);
+                    store.ButtonTrigger = ButtonTrigger;
                     DataStore.StoresName.add(buttonName);
                     DataStore.Stores.put(buttonName, store);
                     panel.add(ButtonTrigger);
@@ -79,6 +82,22 @@ public class MainMenu {
                 }
             }
         });
+
+        // get initial store list
+        Database.getStoreList();
+        for (Map.Entry<String, Store> entry : DataStore.Stores.entrySet()) {
+            Store store = entry.getValue();
+            panel.add(store.ButtonTrigger);
+            store.ButtonTrigger.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton clickedButton = (JButton) e.getSource();
+                    DataStore.showStoreMenu(clickedButton.getText());
+                }
+            });
+            panel.revalidate();
+            panel.repaint();
+        }
 
         return panel;
     }
