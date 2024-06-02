@@ -79,10 +79,11 @@ public class GoodsPage implements ActionListener {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(0, 2, 10, 10));
 
-        inputPanel.add(new JLabel("商品名稱:"));
+        JLabel GoodsName = new JLabel("商品名稱:"), GoodsPrice = new JLabel("商品價格:");
+        inputPanel.add(GoodsName);
         JTextField productNameField = new JTextField();
         inputPanel.add(productNameField);
-        inputPanel.add(new JLabel("商品價格:"));
+        inputPanel.add(GoodsPrice);
         JTextField productPriceField = new JTextField();
         inputPanel.add(productPriceField);
 
@@ -109,6 +110,21 @@ public class GoodsPage implements ActionListener {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(productNameField.getText().trim().isEmpty() || DataStore.Stores.get(DataStore.MainFrame.getTitle()).AllGoodsName.contains(GoodsName.getText()))
+                {
+                    JOptionPane.showMessageDialog(DataStore.MainFrame, "商品名稱空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                else if(productPriceField.getText().trim().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(DataStore.MainFrame, "商品價格空白", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                else
+                {
+                    DataStore.Stores.get(DataStore.MainFrame.getTitle()).AllGoodsName.add(DataStore.MainFrame.getTitle());
+                }
+
                 Goods goods = new Goods();
                 goods.name = productNameField.getText();
                 goods.price = Integer.parseInt(productPriceField.getText());
@@ -118,16 +134,15 @@ public class GoodsPage implements ActionListener {
 
                 OuterPanel.setPreferredSize(new Dimension(300, 200));
                 OuterPanel.setBackground(new Color(173, 216, 230));
-                OuterPanel.setLayout(new BorderLayout());
+                OuterPanel.setLayout(new BorderLayout());      
                 OuterPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
-                // 创建NorthPanel并居中对齐
                 JLabel NameLabel = new JLabel("商品名稱: " + goods.name);
                 JPanel NorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 NorthPanel.add(NameLabel);
                 OuterPanel.add(NorthPanel, BorderLayout.NORTH);
                 NameLabel.setFont(new Font("宋体", Font.BOLD, 20));
-                // 创建SouthPanel并居中对齐
+
                 JLabel PriceLabel = new JLabel("商品價格: " + goods.price);
                 JPanel SouthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 SouthPanel.add(PriceLabel);
@@ -149,8 +164,21 @@ public class GoodsPage implements ActionListener {
                     materialNumberField = materialPanel.getComponent(i + 3) instanceof JTextField
                             ? (JTextField) materialPanel.getComponent(i + 3)
                             : null;
+
+                    if(materialNameField.getText().trim().isEmpty())
+                    {
+                        JOptionPane.showMessageDialog(DataStore.MainFrame, "材料名稱未輸入", "錯誤", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     m.name = materialNameField.getText();
+
+                    if(materialNumberField.getText().trim().isEmpty())
+                    {
+                        JOptionPane.showMessageDialog(DataStore.MainFrame, "材料數量未輸入", "錯誤", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     m.number = Float.parseFloat(materialNumberField.getText());
+
                     goods.materials.add(m);
 
                     JLabel meterialNameLabel = new JLabel("所需材料: " + m.name),
