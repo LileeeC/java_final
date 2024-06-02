@@ -2,7 +2,6 @@
 package Pages;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -136,7 +135,6 @@ public class GoodsPage implements ActionListener {
             public String thisDialogName = "";
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(thisDialogName);
                 if(productNameField.getText().trim().isEmpty() || (DataStore.Stores.get(DataStore.MainFrame.getTitle()).AllGoodsName.contains(productNameField.getText()) && DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsList.get(productNameField.getText()).Data != dialog))
                 {
                     JOptionPane.showMessageDialog(DataStore.MainFrame, "商品名稱空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
@@ -153,8 +151,6 @@ public class GoodsPage implements ActionListener {
                 if(thisDialogName == "")
                 {
                     goods = new Goods();
-                    goods.name = productNameField.getText();
-                    goods.price = Integer.parseInt(productPriceField.getText());
                 }
                 else
                 {

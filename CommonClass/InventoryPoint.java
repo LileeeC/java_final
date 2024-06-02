@@ -19,6 +19,6 @@ public class InventoryPoint {
     public JPanel PointPanel;
 
     public InventoryPoint() {
-        PointPanel = InventoryItemPage.createInventoryItemPagePanel();
+        
     }
 }
