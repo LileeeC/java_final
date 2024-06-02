@@ -10,12 +10,7 @@ import Pages.*;
 public class DataStore {
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
-    public static Set<String> InventoryPointName = new HashSet<>();
-    public static Set<String> InventoryItemName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
-    public static Set<String> GoodsName = new HashSet<>();
-    public static Map<String, InventoryPoint> InventoryPoint = new HashMap<>();
-    public static Map<String, InventoryItem> InventoryItem = new HashMap<>();
 
     private static CardLayout cardLayout;
     public static JPanel cardPanel;
@@ -53,19 +48,15 @@ public class DataStore {
         // Initialize other panels but don't add them yet
         storePagePanel = StorePage.createStoreMenuPanel();
         goodsPagePanel = null;
-        inventoryPagePanel = InventoryPage.createInventoryPagePanel();
+        inventoryPagePanel = null;
         financeReportPanel = FinancePage.createFinanceReportPanel();
-        inventoryItemPagePanel = InventoryItemPage.createInventoryItemPagePanel();
+        inventoryItemPagePanel = null;
 
         cardPanel.add(storePagePanel, "Store Menu");
-        cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardPanel.add(financeReportPanel, "Finance Report");
-        cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
 
         storePagePanel.setBackground(Color.LIGHT_GRAY);
-        inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
-        inventoryItemPagePanel.setBackground(Color.LIGHT_GRAY);
 
         // MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
@@ -103,6 +94,13 @@ public class DataStore {
 
     public static void showInventoryPage(String command) {
         // cardPanel.add(inventoryPagePanel, "Inventory Page");
+        if (inventoryPagePanel != null) {
+            cardPanel.remove(inventoryPagePanel);
+        }
+
+        inventoryPagePanel = Stores.get(MainFrame.getTitle()).PointsPanel;
+        inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
+        cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
     }
 
@@ -111,12 +109,18 @@ public class DataStore {
         cardLayout.show(cardPanel, "Finance Report");
     }
 
-    public static void showInventoryItemPage(String command) {
+    public static void showInventoryItemPage(String command, String buttonName) {
         // cardPanel.add(financeReportPanel, "Finance Report");
+        if (inventoryItemPagePanel != null) {
+            cardPanel.remove(inventoryItemPagePanel);
+        }
+
+        inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointPanel;
+        cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
         cardLayout.show(cardPanel, "Inventory Item Page");
     }
 
-    //最常見的按鈕，表示可以再點進去
+    // 最常見的按鈕，表示可以再點進去
     public static JButton createCustomButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(300, 200));
@@ -140,7 +144,7 @@ public class DataStore {
         return button;
     }
 
-    //新增按鈕
+    // 新增按鈕
     public static JButton createAddButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(300, 200));
@@ -163,9 +167,9 @@ public class DataStore {
 
         return button;
     }
-    
-    //返回鍵按鈕
-    public static JButton createBackButton(String text){
+
+    // 返回鍵按鈕
+    public static JButton createBackButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(130, 60));
         button.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
@@ -180,6 +184,7 @@ public class DataStore {
                 button.setBackground(new Color(184, 37, 77));
                 button.setForeground(Color.WHITE);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(217, 180, 190));
                 button.setForeground(Color.BLACK);
@@ -189,9 +194,9 @@ public class DataStore {
         return button;
     }
 
-    //可自訂參數的按鈕
+    // 可自訂參數的按鈕
     public static JButton createCustomButton(String text, Dimension size, Color bgColor, Color textColor,
-                                            Color hoverColor, Color borderColor, int borderWidth) {
+            Color hoverColor, Color borderColor, int borderWidth) {
         JButton button = new JButton(text);
         button.setPreferredSize(size);
         button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
