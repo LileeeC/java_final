@@ -1,21 +1,29 @@
 //the look of store page
 package Pages;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import src.*;
 
 public class StorePage implements ActionListener {
     public static JPanel createStoreMenuPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Create a new panel for the top
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER)) /*{
             @Override
             public Dimension getPreferredSize() {
                 Container parent = getParent();
@@ -45,10 +53,21 @@ public class StorePage implements ActionListener {
                 }
                 return super.getPreferredSize();
             }
-        };
+        }*/;
+        JLabel titleLabel = new JLabel("店家管理");
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titlePanel.add(titleLabel);
+        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        mainPanel.add(titlePanel, BorderLayout.PAGE_START);
+
         StorePage storePage = new StorePage();
 
-        JButton mainMenuButton = DataStore.createCustomButton("主選單");
+        // Create a center panel with a specific width
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 90, 80));
+        centerPanel.setBorder(new EmptyBorder(10, 50, 0, 50)); // 上, 左, 下, 右邊距
+        centerPanel.setPreferredSize(new Dimension(600, 0)); // 設定 centerPanel 的寬度
+
+        JButton mainMenuButton = DataStore.createBackButton("店家總覽");
         mainMenuButton.addActionListener(storePage);
         mainMenuButton.setActionCommand("Main Menu");
 
@@ -64,12 +83,22 @@ public class StorePage implements ActionListener {
         financeReportButton.addActionListener(storePage);
         financeReportButton.setActionCommand("Finance Report");
 
-        panel.add(mainMenuButton);
-        panel.add(goodsPageButton);
-        panel.add(inventoryPageButton);
-        panel.add(financeReportButton);
+        centerPanel.add(mainMenuButton);
+        centerPanel.add(goodsPageButton);
+        centerPanel.add(inventoryPageButton);
+        centerPanel.add(financeReportButton);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        return panel;
+        //at the bottom
+        JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setPreferredSize(new Dimension(300, 60));
+        bottomPanelContainer.add(bottomPanel);
+        mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
+
+        
+        return mainPanel;
     }
 
     @Override
