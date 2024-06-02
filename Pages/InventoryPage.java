@@ -9,11 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import CommonClass.Goods;
 import CommonClass.InventoryPoint;
 import src.DataStore;
 
@@ -54,12 +52,12 @@ public class InventoryPage implements ActionListener {
 
         InventoryPage inventoryPage = new InventoryPage();
 
-        JButton storeMenuButton = DataStore.createCustomButton("返回");
+        JButton storeMenuButton = DataStore.createBackButton("返回");
         storeMenuButton.addActionListener(inventoryPage);
         storeMenuButton.setActionCommand("Store Menu");
         panel.add(storeMenuButton);
 
-        JButton addInventoryPointButton = src.DataStore.createCustomButton("新增庫存點");
+        JButton addInventoryPointButton = src.DataStore.createAddButton("新增庫存點");
         panel.add(addInventoryPointButton);
 
         addInventoryPointButton.addActionListener(new ActionListener() {
