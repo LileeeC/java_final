@@ -14,7 +14,6 @@ public class DataStore {
     public static Set<String> InventoryItemName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
     public static Set<String> GoodsName = new HashSet<>();
-    public static Map<String, Goods> Goods = new HashMap<>();
     public static Map<String, InventoryPoint> InventoryPoint = new HashMap<>();
     public static Map<String, InventoryItem> InventoryItem = new HashMap<>();
 

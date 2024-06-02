@@ -64,15 +64,15 @@ public class MainMenu {
                     Store store = new Store();
                     JButton ButtonTrigger = DataStore.createCustomButton(buttonName);
                     store.ButtonTrigger = ButtonTrigger;
-                    DataStore.StoresName.add(buttonName);
-                    DataStore.Stores.put(buttonName, store);
+                    store.name = buttonName;
+                    DataStore.StoresName.add(store.name);
+                    DataStore.Stores.put(store.name, store);
                     panel.add(ButtonTrigger);
                     ButtonTrigger.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             JButton clickedButton = (JButton) e.getSource();
                             DataStore.showStoreMenu(clickedButton.getText());
-                            DataStore.Stores.put(buttonName, new Store());
                         }
                     });
                     panel.revalidate();
