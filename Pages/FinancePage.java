@@ -3,15 +3,12 @@ package Pages;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,19 +30,20 @@ public class FinancePage implements ActionListener {
         JLabel titleLabel = new JLabel("財務報表頁面");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
         titlePanel.add(titleLabel);
+        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
         FinancePage financePage = new FinancePage();
 
         // Create a new panel for the bottom part
         JPanel bottomPanelContainer = new JPanel(new BorderLayout());
-        bottomPanelContainer.setLayout(new BoxLayout(bottomPanelContainer, BoxLayout.Y_AXIS));
+        // bottomPanelContainer.setLayout(new BoxLayout(bottomPanelContainer, BoxLayout.Y_AXIS));
         bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setPreferredSize(new Dimension(300, 210)); // 設定 bottomPanel 的大小
+        bottomPanel.setPreferredSize(new Dimension(300, 60)); // 設定 bottomPanel 的大小
         
-        JButton storeMenuButton = DataStore.createCustomButton("返回");
+        JButton storeMenuButton = DataStore.createBackButton("返回");
         storeMenuButton.addActionListener(financePage);
         storeMenuButton.setActionCommand("Store Menu");
         bottomPanel.add(storeMenuButton);
@@ -80,15 +78,7 @@ public class FinancePage implements ActionListener {
             {"20240602", "仙草", "1500"},
             {"20240602", "珍珠", "1000"},
             {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"}
+            {"20240602", "仙草", "1500"}
         };
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -103,12 +93,6 @@ public class FinancePage implements ActionListener {
         JTableHeader tableHeader = table.getTableHeader();
         Font headerFont = new Font("Serif", Font.BOLD, 20);
         tableHeader.setFont(headerFont);
-
-        // Set minimum column width
-        // for (int i = 0; i < table.getColumnCount(); i++) {
-        //     TableColumn column = table.getColumnModel().getColumn(i);
-        //     column.setMinWidth(100);
-        // }
         
         // Set table size
         table.setPreferredScrollableViewportSize(new Dimension(300, 200));

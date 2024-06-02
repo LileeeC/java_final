@@ -1,9 +1,6 @@
 //attributes of inventory items
 package CommonClass;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JButton;
 
 public class InventoryItem {

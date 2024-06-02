@@ -5,9 +5,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -57,13 +55,13 @@ public class GoodsPage implements ActionListener {
         // panel.setPreferredSize(new Dimension(400, 500));
 
         // back button
-        JButton storeMenuButton = DataStore.createCustomButton("返回");
+        JButton storeMenuButton = DataStore.createBackButton("返回");
         storeMenuButton.addActionListener(goodsPage);
         storeMenuButton.setActionCommand("Store Menu");
         panel.add(storeMenuButton);
 
         // addgoodsbutton
-        JButton addGoodsButton = src.DataStore.createCustomButton("新增商品");
+        JButton addGoodsButton = src.DataStore.createAddButton("新增商品");
         addGoodsButton.addActionListener(goodsPage);
         addGoodsButton.setActionCommand("Add Goods");
         panel.add(addGoodsButton);

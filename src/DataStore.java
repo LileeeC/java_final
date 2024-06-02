@@ -117,12 +117,13 @@ public class DataStore {
         cardLayout.show(cardPanel, "Inventory Item Page");
     }
 
+    //最常見的按鈕，表示可以再點進去
     public static JButton createCustomButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(300, 200));
         button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
         button.setForeground(Color.WHITE);
-        button.setBackground(new Color(85, 74, 130));
+        button.setBackground(new Color(93, 55, 135));
         button.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(139, 129, 184), 5),
                 BorderFactory.createEmptyBorder(5, 15, 5, 15)));
@@ -133,12 +134,85 @@ public class DataStore {
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(85, 74, 130));
+                button.setBackground(new Color(93, 55, 135));
             }
         });
 
         return button;
     }
 
-    // 設定其他的createCustomButton
+    //新增按鈕
+    public static JButton createAddButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(300, 200));
+        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(24, 52, 89));
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(61, 97, 145), 5),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(63, 101, 150));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(24, 52, 89));
+            }
+        });
+
+        return button;
+    }
+    
+    //返回鍵按鈕
+    public static JButton createBackButton(String text){
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(130, 60));
+        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
+        button.setForeground(Color.BLACK);
+        button.setBackground(new Color(217, 180, 190));
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(212, 138, 158), 5),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(184, 37, 77));
+                button.setForeground(Color.WHITE);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(217, 180, 190));
+                button.setForeground(Color.BLACK);
+            }
+        });
+
+        return button;
+    }
+
+    //可自訂參數的按鈕
+    public static JButton createCustomButton(String text, Dimension size, Color bgColor, Color textColor,
+                                            Color hoverColor, Color borderColor, int borderWidth) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(size);
+        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
+        button.setForeground(textColor);
+        button.setBackground(bgColor);
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(borderColor, borderWidth),
+                BorderFactory.createEmptyBorder(5, 15, 5, 15)));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(hoverColor);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(bgColor);
+            }
+        });
+
+        return button;
+    }
+
 }

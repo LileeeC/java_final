@@ -2,14 +2,18 @@
 package Pages;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +22,17 @@ import src.*;
 
 public class MainMenu {
     public static JPanel createMainMenuPanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Create a new panel for the title and center it
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel titleLabel = new JLabel("店家總覽");
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titlePanel.add(titleLabel);
+        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        mainPanel.add(titlePanel, BorderLayout.PAGE_START);
+
+
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 100)) {
             @Override
             public Dimension getPreferredSize() {
@@ -50,7 +65,7 @@ public class MainMenu {
             }
         };
 
-        JButton addStoreButton = src.DataStore.createCustomButton("新增店家");
+        JButton addStoreButton = src.DataStore.createAddButton("新增店家");
         panel.add(addStoreButton);
 
         addStoreButton.addActionListener(new ActionListener() {
