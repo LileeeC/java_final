@@ -2,10 +2,6 @@
 package src;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.*;
 import javax.swing.*;
 import CommonClass.*;
@@ -37,6 +33,7 @@ public class DataStore {
         MainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         MainFrame.setLayout(new BorderLayout());
+        MainFrame.setTitle("商店經營系統");
         // MainFrame.setBounds(0, 0, 300, (int)Double.POSITIVE_INFINITY);
 
         cardLayout = new CardLayout();
@@ -56,19 +53,17 @@ public class DataStore {
 
         // Initialize other panels but don't add them yet
         storePagePanel = StorePage.createStoreMenuPanel();
-        goodsPagePanel = GoodsPage.createGoodsPagePanel();
+        goodsPagePanel = null;
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
         inventoryItemPagePanel = InventoryItemPage.createInventoryItemPagePanel();
 
         cardPanel.add(storePagePanel, "Store Menu");
-        cardPanel.add(goodsPagePanel, "Goods Page");
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardPanel.add(financeReportPanel, "Finance Report");
         cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
 
         storePagePanel.setBackground(Color.LIGHT_GRAY);
-        goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
         inventoryItemPagePanel.setBackground(Color.LIGHT_GRAY);
@@ -85,6 +80,7 @@ public class DataStore {
 
     public static void showMainMenu(String storeName) {
         // cardPanel.add(mainMenuPanel, "Main Menu");
+        MainFrame.setTitle("商店經營系統");
         cardLayout.show(cardPanel, "Main Menu");
     }
 
@@ -96,6 +92,13 @@ public class DataStore {
 
     public static void showGoodsPage() {
         // cardPanel.add(goodsPagePanel, "Goods Page");
+        if (goodsPagePanel != null) {
+            cardPanel.remove(goodsPagePanel);
+        }
+
+        goodsPagePanel = Stores.get(MainFrame.getTitle()).StorePanel;
+        goodsPagePanel.setBackground(Color.LIGHT_GRAY);
+        cardPanel.add(goodsPagePanel, "Goods Page");
         cardLayout.show(cardPanel, "Goods Page");
     }
 

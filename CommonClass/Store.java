@@ -1,10 +1,14 @@
 //attributes of store
 package CommonClass;
 
-import javax.swing.JButton;
+import javax.swing.JPanel;
+import Pages.GoodsPage;
 
 public class Store {
-    public String StoreName;
-    public JButton ButtonTrigger;
+    public JPanel StorePanel = new JPanel();
     public Goods[] GoodsList;
+
+    public Store() {
+        StorePanel = GoodsPage.createGoodsPagePanel();
+    }
 }
