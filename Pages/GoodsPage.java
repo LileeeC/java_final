@@ -90,7 +90,15 @@ public class GoodsPage implements ActionListener {
         JPanel materialPanel = new JPanel();
         materialPanel.setLayout(new GridLayout(0, 2, 10, 10));
         JScrollPane scrollPane = new JScrollPane(materialPanel);
+        materialPanel.add(new JLabel("材料名稱:"));
+        materialPanel.add(new JTextField());
 
+        materialPanel.add(new JLabel("材料數量:"));
+        materialPanel.add(new JTextField());
+
+        materialPanel.revalidate();
+        materialPanel.repaint();
+        
         JButton addMaterialButton = new JButton("新增材料");
         addMaterialButton.addActionListener(new ActionListener() {
             @Override
@@ -101,6 +109,24 @@ public class GoodsPage implements ActionListener {
                 materialPanel.add(new JLabel("材料數量:"));
                 materialPanel.add(new JTextField());
 
+                materialPanel.revalidate();
+                materialPanel.repaint();
+            }
+        });
+
+        JButton removeMaterialButton = new JButton("移除材料");
+        removeMaterialButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(materialPanel.getComponentCount() < 8)
+                {
+                    return;
+                }
+
+                for(int i = 0; i < 4; i++)
+                {
+                    materialPanel.remove(materialPanel.getComponent(materialPanel.getComponentCount() - 1));
+                }
                 materialPanel.revalidate();
                 materialPanel.repaint();
             }
@@ -202,6 +228,7 @@ public class GoodsPage implements ActionListener {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(addMaterialButton);
+        buttonPanel.add(removeMaterialButton);
         buttonPanel.add(confirmButton);
 
         dialog.add(inputPanel, BorderLayout.NORTH);
