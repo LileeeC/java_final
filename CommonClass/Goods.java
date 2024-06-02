@@ -10,7 +10,7 @@ public class Goods {
   public ArrayList<Material> materials;
   public int number;
   public int price;
-  public int cost;
+  public float cost;
   public JButton ButtonTrigger;
 
   public Goods() {

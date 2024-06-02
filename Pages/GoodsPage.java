@@ -1,8 +1,11 @@
 //the look of goods page
 package Pages;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -65,30 +68,6 @@ public class GoodsPage implements ActionListener {
         addGoodsButton.setActionCommand("Add Goods");
         panel.add(addGoodsButton);
 
-        // JPanel panel = new JPanel(new GridBagLayout());
-
-        // GridBagConstraints gbc = new GridBagConstraints();
-        // gbc.insets = new Insets(10, 10, 10, 10);
-
-        // JLabel label = new JLabel("商品列表");
-        // label.setFont(new Font("Serif", Font.PLAIN, 28));
-        // panel.add(label, gbc);
-
-        // ArrayList<Goods> goods = new ArrayList<>();
-        // for (int i = 0; i < 20; i++)
-        // goods.add(new Goods());
-
-        // int x = 0;
-        // int y = 1; // 从第二行开始，因为第一行有标题
-        // for (Goods currentGoods : goods) {
-        // addGoodsToPanel(panel, gbc, currentGoods, x, y);
-        // y += 5; // 每个商品占用五行
-        // if (y > 10) {
-        // x++;
-        // y = 1; // 重置为第二行
-        // }
-        // }
-
         return panel;
     }
 
@@ -133,22 +112,57 @@ public class GoodsPage implements ActionListener {
                 Goods goods = new Goods();
                 goods.name = productNameField.getText();
                 goods.price = Integer.parseInt(productPriceField.getText());
-                /*
-                 * Goods goods = new Goods(productNameField.getText());
-                 * for (int i = 0; i < materialPanel.getComponentCount(); i += 2) {
-                 * if (materialPanel.getComponent(i) instanceof JTextField
-                 * && materialPanel.getComponent(i + 1) instanceof JTextField) {
-                 * JTextField materialNameField = (JTextField) materialPanel.getComponent(i);
-                 * JTextField materialQuantityField = (JTextField) materialPanel.getComponent(i
-                 * + 1);
-                 * goods.addMaterial(materialNameField.getText(),
-                 * Integer.parseInt(materialQuantityField.getText()));
-                 * }
-                 * }
-                 * goodsList.add(goods);
-                 * displayGoods(goods);
-                 * dialog.dispose();
-                 */
+                JTextField materialNameField, materialNumberField;
+
+                JPanel OuterPanel = new JPanel(), InnerPanel = new JPanel();
+
+                OuterPanel.setPreferredSize(new Dimension(300, 200));
+                OuterPanel.setBackground(new Color(173, 216, 230));
+                OuterPanel.setLayout(new BorderLayout());
+                OuterPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+                // 创建NorthPanel并居中对齐
+                JPanel NorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                NorthPanel.add(new JLabel("商品名稱: " + goods.name));
+                OuterPanel.add(NorthPanel, BorderLayout.NORTH);
+
+                // 创建SouthPanel并居中对齐
+                JPanel SouthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                SouthPanel.add(new JLabel("商品價格: " + goods.price));
+                OuterPanel.add(SouthPanel, BorderLayout.SOUTH);
+
+                InnerPanel.setLayout(new BoxLayout(InnerPanel, BoxLayout.Y_AXIS));
+                JPanel CenterPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.insets = new Insets(5, 5, 5, 5); // 设置组件间距
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+
+                for (int i = 0; i < materialPanel.getComponentCount(); i += 4) {
+                    Material m = new Material();
+                    materialNameField = materialPanel.getComponent(i + 1) instanceof JTextField
+                            ? (JTextField) materialPanel.getComponent(i + 1)
+                            : null;
+                    materialNumberField = materialPanel.getComponent(i + 3) instanceof JTextField
+                            ? (JTextField) materialPanel.getComponent(i + 3)
+                            : null;
+                    m.name = materialNameField.getText();
+                    m.number = Float.parseFloat(materialNumberField.getText());
+                    goods.materials.add(m);
+
+                    CenterPanel.add(new JLabel("所需材料: " + m.name), gbc);
+                    gbc.gridx++;
+                    CenterPanel.add(new JLabel("所需數量: " + m.number), gbc);
+                    gbc.gridx = 0;
+                    gbc.gridy++;
+                }
+
+                InnerPanel.add(CenterPanel);
+                OuterPanel.add(InnerPanel, BorderLayout.CENTER);
+                DataStore.goodsPagePanel.add(OuterPanel);
+                DataStore.goodsPagePanel.revalidate();
+                DataStore.goodsPagePanel.repaint();
+                dialog.dispose();
             }
         });
 
@@ -176,35 +190,4 @@ public class GoodsPage implements ActionListener {
             openInputDialog();
         }
     }
-    // public static void addGoodsToPanel(JPanel panel, GridBagConstraints gbc,
-    // Goods currentGoods, int x, int y) {
-    // JLabel nameLabel = new JLabel("商品名稱：" + currentGoods.name);
-    // nameLabel.setFont(new Font("Serif", Font.PLAIN, 24));
-    // gbc.gridx = x;
-    // gbc.gridy = y;
-    // panel.add(nameLabel, gbc);
-
-    // for (Material material : currentGoods.materials) {
-    // JLabel materialLabel = new JLabel("材料：" + material.toString()); // 或使用
-    // material.name
-    // materialLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-    // gbc.gridy = ++y;
-    // panel.add(materialLabel, gbc);
-    // }
-
-    // JLabel numberLabel = new JLabel("數量：" + currentGoods.number);
-    // numberLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-    // gbc.gridy = ++y;
-    // panel.add(numberLabel, gbc);
-
-    // JLabel priceLabel = new JLabel("價格：" + currentGoods.price);
-    // priceLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-    // gbc.gridy = ++y;
-    // panel.add(priceLabel, gbc);
-
-    // JLabel costLabel = new JLabel("成本：" + currentGoods.cost);
-    // costLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-    // gbc.gridy = ++y;
-    // panel.add(costLabel, gbc);
-    // }
 }
