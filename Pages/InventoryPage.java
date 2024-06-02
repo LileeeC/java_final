@@ -93,7 +93,7 @@ public class InventoryPage implements ActionListener {
         String command = e.getActionCommand();
 
         if ("Store Menu".equals(command)) {
-            DataStore.showStoreMenu(command);
+            DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
         } else if ("Inventory Item Page".equals(command)) {
             DataStore.showInventoryItemPage(command);
         }

@@ -60,16 +60,16 @@ public class MainMenu {
 
                 if (buttonName != null && !buttonName.trim().isEmpty() && !DataStore.StoresName.contains(buttonName)) {
                     Store store = new Store();
-                    store.ButtonTrigger = DataStore.createCustomButton(buttonName);
-                    store.StoreName = buttonName;
-                    DataStore.StoresName.add(store.StoreName);
+                    JButton ButtonTrigger = DataStore.createCustomButton(buttonName);
+                    DataStore.StoresName.add(buttonName);
                     DataStore.Stores.put(buttonName, store);
-                    panel.add(store.ButtonTrigger);
-                    store.ButtonTrigger.addActionListener(new ActionListener() {
+                    panel.add(ButtonTrigger);
+                    ButtonTrigger.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             JButton clickedButton = (JButton) e.getSource();
                             DataStore.showStoreMenu(clickedButton.getText());
+                            DataStore.Stores.put(buttonName, new Store());
                         }
                     });
                     panel.revalidate();

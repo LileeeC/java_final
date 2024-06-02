@@ -122,14 +122,17 @@ public class GoodsPage implements ActionListener {
                 OuterPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
                 // 创建NorthPanel并居中对齐
+                JLabel NameLabel = new JLabel("商品名稱: " + goods.name);
                 JPanel NorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                NorthPanel.add(new JLabel("商品名稱: " + goods.name));
+                NorthPanel.add(NameLabel);
                 OuterPanel.add(NorthPanel, BorderLayout.NORTH);
-
+                NameLabel.setFont(new Font("宋体", Font.BOLD, 20));
                 // 创建SouthPanel并居中对齐
+                JLabel PriceLabel = new JLabel("商品價格: " + goods.price);
                 JPanel SouthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                SouthPanel.add(new JLabel("商品價格: " + goods.price));
+                SouthPanel.add(PriceLabel);
                 OuterPanel.add(SouthPanel, BorderLayout.SOUTH);
+                PriceLabel.setFont(new Font("宋体", Font.BOLD, 20));
 
                 InnerPanel.setLayout(new BoxLayout(InnerPanel, BoxLayout.Y_AXIS));
                 JPanel CenterPanel = new JPanel(new GridBagLayout());
@@ -150,18 +153,20 @@ public class GoodsPage implements ActionListener {
                     m.number = Float.parseFloat(materialNumberField.getText());
                     goods.materials.add(m);
 
-                    CenterPanel.add(new JLabel("所需材料: " + m.name), gbc);
+                    JLabel meterialNameLabel = new JLabel("所需材料: " + m.name),
+                            materialNumberJLabel = new JLabel("所需數量: " + m.number);
+                    CenterPanel.add(meterialNameLabel, gbc);
                     gbc.gridx++;
-                    CenterPanel.add(new JLabel("所需數量: " + m.number), gbc);
+                    CenterPanel.add(materialNumberJLabel, gbc);
                     gbc.gridx = 0;
                     gbc.gridy++;
                 }
 
                 InnerPanel.add(CenterPanel);
                 OuterPanel.add(InnerPanel, BorderLayout.CENTER);
-                DataStore.goodsPagePanel.add(OuterPanel);
-                DataStore.goodsPagePanel.revalidate();
-                DataStore.goodsPagePanel.repaint();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.add(OuterPanel);
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.revalidate();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.repaint();
                 dialog.dispose();
             }
         });
@@ -183,9 +188,7 @@ public class GoodsPage implements ActionListener {
         String command = e.getActionCommand();
 
         if ("Store Menu".equals(command)) {
-            DataStore.showStoreMenu(command);
-        } else if ("Main Menu".equals(command)) {
-            DataStore.showMainMenu(command);
+            DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
         } else if ("Add Goods".equals(command)) {
             openInputDialog();
         }

@@ -65,7 +65,7 @@ public class FinancePage implements ActionListener {
         String command = e.getActionCommand();
 
         if ("Store Menu".equals(command)) {
-            DataStore.showStoreMenu(command);
+            DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
         }
     }
 }
