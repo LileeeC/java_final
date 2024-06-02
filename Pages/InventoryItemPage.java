@@ -62,32 +62,7 @@ public class InventoryItemPage implements ActionListener {
     addInventoryItemButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String buttonName = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入庫存名稱: ");
-
-        if (buttonName != null && !buttonName.trim().isEmpty()
-            && !DataStore.InventoryItemName.contains(buttonName)) {
-          InventoryItem item = new InventoryItem();
-          item.ButtonTrigger = DataStore.createCustomButton(buttonName);
-          item.name = buttonName;
-          DataStore.InventoryItemName.add(item.name);
-          DataStore.InventoryItem.put(buttonName, item);
-
-          String quantities = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入庫存數量: ");
-          while (!(quantities != null && !quantities.trim().isEmpty()
-              && isFloat(quantities))) {
-            JOptionPane.showMessageDialog(DataStore.MainFrame, "庫存名稱不能空白或非數字", "錯誤", JOptionPane.ERROR_MESSAGE);
-            quantities = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入庫存數量: ");
-          }
-          item.quantities = Float.parseFloat(quantities);
-
-          panel.add(item.ButtonTrigger);
-
-          panel.revalidate();
-          panel.repaint();
-        } else if (buttonName != null) {
-          JOptionPane.showMessageDialog(DataStore.MainFrame, "庫存名稱不能空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
-        }
-
+        String buttonName = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入材料名稱: ");
       }
     });
 
