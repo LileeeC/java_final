@@ -79,7 +79,7 @@ public class StorePage implements ActionListener {
         if ("Goods Page".equals(command)) {
             DataStore.showGoodsPage();
         } else if ("Inventory Page".equals(command)) {
-            DataStore.showInventoryPage();
+            DataStore.showInventoryPage(command);
         } else if ("Finance Report".equals(command)) {
             DataStore.showFinanceReportPage();
         } else if ("Store Menu".equals(command)) {

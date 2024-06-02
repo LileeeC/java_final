@@ -4,10 +4,14 @@ package CommonClass;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InventoryItem {
-    public Map<String, Float> quantities;
+import javax.swing.JButton;
 
-    InventoryItem() {
-        quantities = new HashMap<>();
+public class InventoryItem {
+    public float quantities;
+    public JButton ButtonTrigger;
+    public String name;
+
+    public InventoryItem() {
+        quantities = (float) 0;
     }
 }
