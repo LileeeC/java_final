@@ -14,9 +14,13 @@ import Pages.*;
 public class DataStore {
     public static JFrame MainFrame;
     public static Set<String> StoresName = new HashSet<>();
+    public static Set<String> InventoryPointName = new HashSet<>();
+    public static Set<String> InventoryItemName = new HashSet<>();
     public static Map<String, Store> Stores = new HashMap<>();
     public static Set<String> GoodsName = new HashSet<>();
     public static Map<String, Goods> Goods = new HashMap<>();
+    public static Map<String, InventoryPoint> InventoryPoint = new HashMap<>();
+    public static Map<String, InventoryItem> InventoryItem = new HashMap<>();
 
     private static CardLayout cardLayout;
     public static JPanel cardPanel;
@@ -25,6 +29,7 @@ public class DataStore {
     public static JPanel inventoryPagePanel;
     public static JPanel financeReportPanel;
     public static JPanel storePagePanel;
+    public static JPanel inventoryItemPagePanel;
 
     private DataStore() {
         MainFrame = new JFrame();
@@ -54,16 +59,19 @@ public class DataStore {
         goodsPagePanel = GoodsPage.createGoodsPagePanel();
         inventoryPagePanel = InventoryPage.createInventoryPagePanel();
         financeReportPanel = FinancePage.createFinanceReportPanel();
+        inventoryItemPagePanel = InventoryItemPage.createInventoryItemPagePanel();
 
         cardPanel.add(storePagePanel, "Store Menu");
         cardPanel.add(goodsPagePanel, "Goods Page");
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardPanel.add(financeReportPanel, "Finance Report");
+        cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
 
         storePagePanel.setBackground(Color.LIGHT_GRAY);
         goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
+        inventoryItemPagePanel.setBackground(Color.LIGHT_GRAY);
 
         // MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
@@ -91,7 +99,7 @@ public class DataStore {
         cardLayout.show(cardPanel, "Goods Page");
     }
 
-    public static void showInventoryPage() {
+    public static void showInventoryPage(String command) {
         // cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
     }
@@ -99,6 +107,11 @@ public class DataStore {
     public static void showFinanceReportPage() {
         // cardPanel.add(financeReportPanel, "Finance Report");
         cardLayout.show(cardPanel, "Finance Report");
+    }
+
+    public static void showInventoryItemPage(String command) {
+        // cardPanel.add(financeReportPanel, "Finance Report");
+        cardLayout.show(cardPanel, "Inventory Item Page");
     }
 
     public static JButton createCustomButton(String text) {

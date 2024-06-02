@@ -10,8 +10,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import CommonClass.Goods;
+import CommonClass.InventoryPoint;
 import src.DataStore;
 
 public class InventoryPage implements ActionListener {
@@ -47,15 +50,41 @@ public class InventoryPage implements ActionListener {
                 return super.getPreferredSize();
             }
         };
-        panel.add(new JLabel("材料庫存頁面"));
+        // panel.add(new JLabel("材料庫存頁面"));
 
         InventoryPage inventoryPage = new InventoryPage();
 
-        JButton storeMenuButton = DataStore.createCustomButton("葉志嘉說返回上一頁");
+        JButton storeMenuButton = DataStore.createCustomButton("返回");
         storeMenuButton.addActionListener(inventoryPage);
         storeMenuButton.setActionCommand("Store Menu");
         panel.add(storeMenuButton);
 
+        JButton addInventoryPointButton = src.DataStore.createCustomButton("新增庫存點");
+        panel.add(addInventoryPointButton);
+
+        addInventoryPointButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String buttonName = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入庫存點名稱: ");
+
+                if (buttonName != null && !buttonName.trim().isEmpty()
+                        && !DataStore.InventoryPointName.contains(buttonName)) {
+                    InventoryPoint point = new InventoryPoint();
+                    point.ButtonTrigger = DataStore.createCustomButton(buttonName);
+                    point.name = buttonName;
+                    DataStore.InventoryPointName.add(point.name);
+                    DataStore.InventoryPoint.put(buttonName, point);
+                    panel.add(point.ButtonTrigger);
+                    point.ButtonTrigger.addActionListener(inventoryPage);
+                    point.ButtonTrigger.setActionCommand("Inventory Item Page");
+
+                    panel.revalidate();
+                    panel.repaint();
+                } else if (buttonName != null) {
+                    JOptionPane.showMessageDialog(DataStore.MainFrame, "庫存點名稱不能空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         return panel;
     }
 
@@ -65,6 +94,8 @@ public class InventoryPage implements ActionListener {
 
         if ("Store Menu".equals(command)) {
             DataStore.showStoreMenu(command);
+        } else if ("Inventory Item Page".equals(command)) {
+            DataStore.showInventoryItemPage(command);
         }
     }
 }
