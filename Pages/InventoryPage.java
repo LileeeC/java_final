@@ -66,12 +66,12 @@ public class InventoryPage implements ActionListener {
                 String buttonName = JOptionPane.showInputDialog(DataStore.MainFrame, "輸入庫存點名稱: ");
 
                 if (buttonName != null && !buttonName.trim().isEmpty()
-                        && !DataStore.InventoryPointName.contains(buttonName)) {
+                        && !DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap
+                                .containsKey(buttonName)) {
                     InventoryPoint point = new InventoryPoint();
                     point.name = buttonName;
                     point.ButtonTrigger.put(point.name, DataStore.createCustomButton(buttonName));
-                    DataStore.InventoryPointName.add(point.name);
-                    DataStore.InventoryPoint.put(buttonName, point);
+                    DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.put(buttonName, point);
                     panel.add(point.ButtonTrigger.get(point.name));
                     point.ButtonTrigger.get(point.name).addActionListener(inventoryPage);
                     point.ButtonTrigger.get(point.name).setActionCommand("Inventory Item Page");
@@ -93,7 +93,7 @@ public class InventoryPage implements ActionListener {
         if ("Store Menu".equals(command)) {
             DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
         } else if ("Inventory Item Page".equals(command)) {
-            DataStore.showInventoryItemPage(command);
+            DataStore.showInventoryItemPage(command, ((JButton) e.getSource()).getText());
         }
     }
 }

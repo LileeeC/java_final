@@ -239,7 +239,7 @@ public class GoodsPage implements ActionListener {
                 // 剩餘
                 gbc.gridx = 0;
                 gbc.gridy++;
-                JLabel remainingLabel = new JLabel("剩餘: 0");
+                JLabel remainingLabel = new JLabel("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
                 remainingLabel.setFont(labelFont);
                 OuterPanel.add(remainingLabel, gbc);
 
