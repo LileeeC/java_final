@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Goods {
@@ -18,6 +19,7 @@ public class Goods {
   public JButton ButtonTrigger;
   public Dialog Data;
   public JPanel display;
+  public JLabel remainingLabel;
 
   public Goods() {
     name = "商品";
