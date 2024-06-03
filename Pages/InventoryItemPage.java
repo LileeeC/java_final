@@ -32,14 +32,15 @@ import src.DataStore;
 
 public class InventoryItemPage implements ActionListener {
   public static JPanel createInventoryItemPagePanel(String InventoryName) {
+    InventoryItemPage inventoryItemPage = new InventoryItemPage();
     JPanel mainPanel = new JPanel(new BorderLayout());
 
     // Create a new panel for the title and center it
       JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-      JLabel titleLabel = new JLabel("庫存點材料庫存");
-      titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+      JLabel titleLabel = new JLabel("材料庫存");
+      titleLabel.setFont(new Font("新宋体", Font.BOLD, 40));
       titlePanel.add(titleLabel);
-      titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+      titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
       mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
     JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
@@ -73,7 +74,6 @@ public class InventoryItemPage implements ActionListener {
         return super.getPreferredSize();
       }
     };
-    InventoryItemPage inventoryItemPage = new InventoryItemPage();
 
     // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
     JScrollPane scrollPane = new JScrollPane(panel);
@@ -268,7 +268,9 @@ public class InventoryItemPage implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     String command = e.getActionCommand();
 
-    if ("Inventory Page".equals(command)) {
+    if ("Store Menu".equals(command)) {
+      DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
+    } else if ("Inventory Page".equals(command)) {
       DataStore.showInventoryPage(command);
     }
   }

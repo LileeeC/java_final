@@ -52,9 +52,9 @@ public class StorePage implements ActionListener {
             }
         }*/;
         JLabel titleLabel = new JLabel("店家管理");
-        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titleLabel.setFont(new Font("新宋体", Font.BOLD, 40));
         titlePanel.add(titleLabel);
-        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
         StorePage storePage = new StorePage();
