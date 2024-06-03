@@ -1,22 +1,37 @@
 //the look of inventory page
 package Pages;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import CommonClass.InventoryPoint;
 import src.DataStore;
 
 public class InventoryPage implements ActionListener {
     public static JPanel createInventoryPagePanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        
+        // Create a new panel for the title and center it
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel titleLabel = new JLabel("材料庫存");
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titlePanel.add(titleLabel);
+        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        mainPanel.add(titlePanel, BorderLayout.PAGE_START);
+
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
             @Override
             public Dimension getPreferredSize() {
@@ -48,14 +63,8 @@ public class InventoryPage implements ActionListener {
                 return super.getPreferredSize();
             }
         };
-        // panel.add(new JLabel("材料庫存頁面"));
 
         InventoryPage inventoryPage = new InventoryPage();
-
-        JButton storeMenuButton = DataStore.createBackButton("返回");
-        storeMenuButton.addActionListener(inventoryPage);
-        storeMenuButton.setActionCommand("Store Menu");
-        panel.add(storeMenuButton);
 
         JButton addInventoryPointButton = src.DataStore.createAddButton("新增庫存點");
         panel.add(addInventoryPointButton);
@@ -84,7 +93,25 @@ public class InventoryPage implements ActionListener {
                 }
             }
         });
-        return panel;
+        // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
+        JScrollPane scrollPane = new JScrollPane(panel);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        //at the bottom
+        JButton storeMenuButton = DataStore.createBackButton("返回", 130);
+        storeMenuButton.addActionListener(inventoryPage);
+        storeMenuButton.setActionCommand("Store Menu");
+
+        JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setPreferredSize(new Dimension(300, 100));
+        bottomPanelContainer.add(bottomPanel);
+
+        bottomPanel.add(storeMenuButton);
+        mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
+
+        return mainPanel;
     }
 
     @Override

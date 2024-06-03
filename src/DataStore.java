@@ -168,10 +168,10 @@ public class DataStore {
         return button;
     }
 
-    // 返回鍵按鈕
-    public static JButton createBackButton(String text) {
+    // 返回鍵按鈕，皆自訂寬度
+    public static JButton createBackButton(String text, int width) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(130, 60));
+        button.setPreferredSize(new Dimension(width, 60));
         button.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
         button.setForeground(Color.BLACK);
         button.setBackground(new Color(217, 180, 190));

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,16 @@ import src.*;
 public class GoodsPage implements ActionListener {
     public static JPanel createGoodsPagePanel() {
         GoodsPage goodsPage = new GoodsPage();
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Create a new panel for the title and center it
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel titleLabel = new JLabel("商品列表");
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titlePanel.add(titleLabel);
+        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        mainPanel.add(titlePanel, BorderLayout.PAGE_START);
+
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
             @Override
             public Dimension getPreferredSize() {
@@ -53,20 +64,31 @@ public class GoodsPage implements ActionListener {
             }
         };
         // panel.setPreferredSize(new Dimension(400, 500));
-
-        // back button
-        JButton storeMenuButton = DataStore.createBackButton("返回");
-        storeMenuButton.addActionListener(goodsPage);
-        storeMenuButton.setActionCommand("Store Menu");
-        panel.add(storeMenuButton);
-
         // addgoodsbutton
         JButton addGoodsButton = src.DataStore.createAddButton("新增商品");
         addGoodsButton.addActionListener(goodsPage);
         addGoodsButton.setActionCommand("Add Goods");
         panel.add(addGoodsButton);
 
-        return panel;
+        // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
+        JScrollPane scrollPane = new JScrollPane(panel);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        //at the bottom
+        JButton storeMenuButton = DataStore.createBackButton("返回", 130);
+        storeMenuButton.addActionListener(goodsPage);
+        storeMenuButton.setActionCommand("Store Menu");
+
+        JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setPreferredSize(new Dimension(300, 100));
+        bottomPanelContainer.add(bottomPanel);
+
+        bottomPanel.add(storeMenuButton);
+        mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
+
+        return mainPanel;
     }
 
     private void openInputDialog() {
