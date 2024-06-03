@@ -33,23 +33,7 @@ public class FinancePage implements ActionListener {
 
         FinancePage financePage = new FinancePage();
 
-        // Create a new panel for the bottom part
-        JPanel bottomPanelContainer = new JPanel(new BorderLayout());
-        // bottomPanelContainer.setLayout(new BoxLayout(bottomPanelContainer, BoxLayout.Y_AXIS));
-        bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
-
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setPreferredSize(new Dimension(300, 60)); // 設定 bottomPanel 的大小
-        
-        JButton storeMenuButton = DataStore.createBackButton("返回");
-        storeMenuButton.addActionListener(financePage);
-        storeMenuButton.setActionCommand("Store Menu");
-        bottomPanel.add(storeMenuButton);
-        bottomPanelContainer.add(bottomPanel);
-
-        mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
-
-        // Create a center panel with a specific width
+        //center panel
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBorder(new EmptyBorder(10, 50, 0, 50)); // 上, 左, 下, 右邊距
         centerPanel.setPreferredSize(new Dimension(600, 0)); // 設定 centerPanel 的寬度
@@ -105,6 +89,20 @@ public class FinancePage implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(table);
         centerPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
+
+        //at the bottom
+        JButton storeMenuButton = DataStore.createBackButton("返回", 130);
+        storeMenuButton.addActionListener(financePage);
+        storeMenuButton.setActionCommand("Store Menu");
+
+        JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setPreferredSize(new Dimension(300, 100));
+        bottomPanelContainer.add(bottomPanel);
+
+        bottomPanel.add(storeMenuButton);
+        mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
 
         return mainPanel;
     }

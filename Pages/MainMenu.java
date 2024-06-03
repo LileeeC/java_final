@@ -113,7 +113,7 @@ public class MainMenu {
             panel.revalidate();
             panel.repaint();
         }
-
-        return panel;
+        mainPanel.add(panel, BorderLayout.CENTER);
+        return mainPanel;
     }
 }
