@@ -2,13 +2,8 @@
 package CommonClass;
 
 import java.util.*;
-
-import javax.sql.DataSource;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import Pages.InventoryItemPage;
-import src.DataStore;
 
 public class InventoryPoint {
     public String name;

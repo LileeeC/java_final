@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,12 +22,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import CommonClass.Goods;
 import CommonClass.InventoryItem;
-import CommonClass.Material;
 import src.DataStore;
 
 public class InventoryItemPage implements ActionListener {
@@ -113,19 +112,19 @@ public class InventoryItemPage implements ActionListener {
         JTextField productNumberField = new JTextField();
         inputPanel.add(productNumberField);
 
-        JButton confirmButton = new JButton("完成商品設定");
+        JButton confirmButton = new JButton("完成");
         confirmButton.addActionListener(new ActionListener() {
             public String thisDialogName = "";
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(productNameField.getText().trim().isEmpty() || (DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.containsKey(productNameField.getText()) && DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(productNameField.getText()).Data != dialog))
                 {
-                    JOptionPane.showMessageDialog(DataStore.MainFrame, "商品名稱空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(DataStore.MainFrame, "材料名稱空白或重複", "錯誤", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 else if(productPriceField.getText().trim().isEmpty())
                 {
-                    JOptionPane.showMessageDialog(DataStore.MainFrame, "商品價格空白", "錯誤", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(DataStore.MainFrame, "材料價格空白", "錯誤", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -216,6 +215,12 @@ public class InventoryItemPage implements ActionListener {
                 DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).PointPanel.repaint();
                 item.Data = dialog;
                 dialog.setVisible(false);
+
+                for(Map.Entry<String, Goods> entry : DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsList.entrySet())
+                {
+                  int val = entry.getValue().RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle()));
+                  entry.getValue().remainingLabel.setText("剩餘: " + val);
+                }
             }
         });
 
