@@ -216,10 +216,10 @@ public class InventoryItemPage implements ActionListener {
                 JLabel remainingLabel = DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel;
                 if(remainingLabel == null)
                 {
-                  remainingLabel= new JLabel("剩餘: " + item.quantities);
+                  remainingLabel= new JLabel();
                   DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel = remainingLabel;
                 }
-
+                remainingLabel.setText("剩餘: " + item.quantities);
                 remainingLabel.setFont(labelFont);
                 OuterPanel.add(remainingLabel, gbc);
 
