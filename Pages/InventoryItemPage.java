@@ -22,7 +22,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import CommonClass.Goods;
 import CommonClass.InventoryItem;
@@ -30,6 +32,16 @@ import src.DataStore;
 
 public class InventoryItemPage implements ActionListener {
   public static JPanel createInventoryItemPagePanel(String InventoryName) {
+    JPanel mainPanel = new JPanel(new BorderLayout());
+
+    // Create a new panel for the title and center it
+      JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      JLabel titleLabel = new JLabel("庫存點材料庫存");
+      titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+      titlePanel.add(titleLabel);
+      titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+      mainPanel.add(titlePanel, BorderLayout.PAGE_START);
+
     JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
       @Override
       public Dimension getPreferredSize() {
@@ -61,16 +73,28 @@ public class InventoryItemPage implements ActionListener {
         return super.getPreferredSize();
       }
     };
-
     InventoryItemPage inventoryItemPage = new InventoryItemPage();
 
-    JButton storeInventoryItemButton = DataStore.createCustomButton("返回");
-    storeInventoryItemButton.addActionListener(inventoryItemPage);
-    storeInventoryItemButton.setActionCommand("Inventory Page");
-    panel.add(storeInventoryItemButton);
+    // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
+    JScrollPane scrollPane = new JScrollPane(panel);
+    mainPanel.add(scrollPane, BorderLayout.CENTER);
 
     JButton addInventoryItemButton = src.DataStore.createCustomButton("新增庫存");
     panel.add(addInventoryItemButton);
+
+    //at the bottom
+    JButton storeMenuButton = DataStore.createBackButton("返回", 130);
+    storeMenuButton.addActionListener(inventoryItemPage);
+    storeMenuButton.setActionCommand("Store Menu");
+
+    JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
+    JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    bottomPanel.setPreferredSize(new Dimension(300, 100));
+    bottomPanelContainer.add(bottomPanel);
+
+    bottomPanel.add(storeMenuButton);
+    mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
 
     addInventoryItemButton.addActionListener(new ActionListener() {
       @Override
@@ -79,7 +103,7 @@ public class InventoryItemPage implements ActionListener {
       }
     });
 
-    return panel;
+    return mainPanel;
   }
 
   public static boolean isFloat(String str) {

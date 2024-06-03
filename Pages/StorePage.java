@@ -60,13 +60,9 @@ public class StorePage implements ActionListener {
         StorePage storePage = new StorePage();
 
         // Create a center panel with a specific width
-        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 90, 80));
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 130, 160));
         centerPanel.setBorder(new EmptyBorder(10, 50, 0, 50)); // 上, 左, 下, 右邊距
         centerPanel.setPreferredSize(new Dimension(600, 0)); // 設定 centerPanel 的寬度
-
-        JButton mainMenuButton = DataStore.createBackButton("店家總覽");
-        mainMenuButton.addActionListener(storePage);
-        mainMenuButton.setActionCommand("Main Menu");
 
         JButton goodsPageButton = DataStore.createCustomButton("商品列表");
         goodsPageButton.addActionListener(storePage);
@@ -80,18 +76,23 @@ public class StorePage implements ActionListener {
         financeReportButton.addActionListener(storePage);
         financeReportButton.setActionCommand("Finance Report");
 
-        centerPanel.add(mainMenuButton);
         centerPanel.add(goodsPageButton);
         centerPanel.add(inventoryPageButton);
         centerPanel.add(financeReportButton);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         //at the bottom
+        JButton mainMenuButton = DataStore.createBackButton("返回店家總覽", 160);
+        mainMenuButton.addActionListener(storePage);
+        mainMenuButton.setActionCommand("Main Menu");
+
         JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setPreferredSize(new Dimension(300, 60));
+        bottomPanel.setPreferredSize(new Dimension(300, 100));
         bottomPanelContainer.add(bottomPanel);
+
+        bottomPanel.add(mainMenuButton);
         mainPanel.add(bottomPanelContainer, BorderLayout.PAGE_END);
 
         
