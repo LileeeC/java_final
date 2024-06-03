@@ -85,7 +85,7 @@ public class InventoryItemPage implements ActionListener {
     //at the bottom
     JButton storeMenuButton = DataStore.createBackButton("返回", 130);
     storeMenuButton.addActionListener(inventoryItemPage);
-    storeMenuButton.setActionCommand("Store Menu");
+    storeMenuButton.setActionCommand("Inventory Page");
 
     JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
     bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
@@ -213,7 +213,13 @@ public class InventoryItemPage implements ActionListener {
                 gbc.gridx = 0;
                 gbc.gridy++;
                 gbc.gridwidth = 2;
-                JLabel remainingLabel = new JLabel("剩餘: " + item.quantities);
+                JLabel remainingLabel = DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel;
+                if(remainingLabel == null)
+                {
+                  remainingLabel= new JLabel("剩餘: " + item.quantities);
+                  DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel = remainingLabel;
+                }
+
                 remainingLabel.setFont(labelFont);
                 OuterPanel.add(remainingLabel, gbc);
 

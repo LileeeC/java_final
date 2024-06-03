@@ -86,7 +86,7 @@ public class DataStore {
             cardPanel.remove(goodsPagePanel);
         }
 
-        goodsPagePanel = Stores.get(MainFrame.getTitle()).StorePanel;
+        goodsPagePanel = Stores.get(MainFrame.getTitle()).GoodsPanelParent;
         goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(goodsPagePanel, "Goods Page");
         cardLayout.show(cardPanel, "Goods Page");
@@ -98,7 +98,7 @@ public class DataStore {
             cardPanel.remove(inventoryPagePanel);
         }
 
-        inventoryPagePanel = Stores.get(MainFrame.getTitle()).PointsPanel;
+        inventoryPagePanel = Stores.get(MainFrame.getTitle()).PointsPanelParent;
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
@@ -115,7 +115,7 @@ public class DataStore {
             cardPanel.remove(inventoryItemPagePanel);
         }
 
-        inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointPanel;
+        inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointsPanelParent;
         cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
         cardLayout.show(cardPanel, "Inventory Item Page");
     }
@@ -218,5 +218,4 @@ public class DataStore {
 
         return button;
     }
-
 }
