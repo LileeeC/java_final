@@ -49,14 +49,12 @@ public class DataStore {
         storePagePanel = StorePage.createStoreMenuPanel();
         goodsPagePanel = null;
         inventoryPagePanel = null;
-        financeReportPanel = FinancePage.createFinanceReportPanel();
+        financeReportPanel = null;
         inventoryItemPagePanel = null;
 
         cardPanel.add(storePagePanel, "Store Menu");
-        cardPanel.add(financeReportPanel, "Finance Report");
 
         storePagePanel.setBackground(Color.LIGHT_GRAY);
-        financeReportPanel.setBackground(Color.LIGHT_GRAY);
 
         // MainFrame.add(cardPanel, BorderLayout.CENTER);
         MainFrame.setVisible(true);
@@ -77,6 +75,10 @@ public class DataStore {
     public static void showStoreMenu(String storeName) {
         MainFrame.setTitle(storeName);
         // cardPanel.add(storePagePanel, "Store Menu");
+        if(Stores.get(storeName).FinancePanelParent == null)
+        {
+            Stores.get(storeName).FinancePanelParent = FinancePage.createFinanceReportPanel();
+        }
         cardLayout.show(cardPanel, "Store Menu");
     }
 
@@ -106,6 +108,13 @@ public class DataStore {
 
     public static void showFinanceReportPage() {
         // cardPanel.add(financeReportPanel, "Finance Report");
+        if (financeReportPanel != null) {
+            cardPanel.remove(financeReportPanel);
+        }
+
+        financeReportPanel = Stores.get(MainFrame.getTitle()).FinancePanelParent;
+        financeReportPanel.setBackground(Color.LIGHT_GRAY);
+        cardPanel.add(financeReportPanel, "Finance Report");
         cardLayout.show(cardPanel, "Finance Report");
     }
 
