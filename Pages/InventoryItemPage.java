@@ -85,7 +85,7 @@ public class InventoryItemPage implements ActionListener {
     //at the bottom
     JButton storeMenuButton = DataStore.createBackButton("返回", 130);
     storeMenuButton.addActionListener(inventoryItemPage);
-    storeMenuButton.setActionCommand("Store Menu");
+    storeMenuButton.setActionCommand("Inventory Page");
 
     JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
     bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding

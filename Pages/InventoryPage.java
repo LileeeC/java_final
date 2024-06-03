@@ -77,9 +77,7 @@ public class InventoryPage implements ActionListener {
                 if (buttonName != null && !buttonName.trim().isEmpty()
                         && !DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap
                                 .containsKey(buttonName)) {
-                    InventoryPoint point = new InventoryPoint();
-                    point.name = buttonName;
-                    point.PointPanel = InventoryItemPage.createInventoryItemPagePanel(point.name);
+                    InventoryPoint point = new InventoryPoint(buttonName);
                     point.ButtonTrigger.put(point.name, DataStore.createCustomButton(buttonName));
                     DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.put(buttonName, point);
                     panel.add(point.ButtonTrigger.get(point.name));
