@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.xml.crypto.Data;
 
 import src.DataStore;
 
@@ -33,39 +34,22 @@ public class FinancePage implements ActionListener {
 
         FinancePage financePage = new FinancePage();
 
-        //center panel
+        // center panel
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBorder(new EmptyBorder(10, 50, 0, 50)); // 上, 左, 下, 右邊距
         centerPanel.setPreferredSize(new Dimension(600, 0)); // 設定 centerPanel 的寬度
 
         // Adding table
-        String[] columnNames = {"日期", "項目", "收支"};
-        Object[][] data = {
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"},
-            {"20240602", "珍珠", "1000"},
-            {"20240602", "珍珠", "-500"},
-            {"20240602", "仙草", "1500"}
-        };
-
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(model);
+        String[] columnNames = { "日期", "項目", "收支" };
+        Object[][] data = DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject;
         
+        JTable table = DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTable;
+        if (table == null) {
+            DefaultTableModel model = new DefaultTableModel(data, columnNames);
+            table = new JTable(model);
+            DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTable = table;
+        }
+
         // Set table font
         Font tableFont = new Font("Serif", Font.PLAIN, 18);
         table.setFont(tableFont);
@@ -75,7 +59,7 @@ public class FinancePage implements ActionListener {
         JTableHeader tableHeader = table.getTableHeader();
         Font headerFont = new Font("Serif", Font.BOLD, 20);
         tableHeader.setFont(headerFont);
-        
+
         // Set table size
         table.setPreferredScrollableViewportSize(new Dimension(300, 200));
         table.setMinimumSize(new Dimension(300, 100));
@@ -87,10 +71,9 @@ public class FinancePage implements ActionListener {
 
         // Add table to scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
-        centerPanel.add(scrollPane, BorderLayout.CENTER);
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        //at the bottom
+        // at the bottom
         JButton storeMenuButton = DataStore.createBackButton("返回", 130);
         storeMenuButton.addActionListener(financePage);
         storeMenuButton.setActionCommand("Store Menu");
