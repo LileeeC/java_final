@@ -235,9 +235,17 @@ public class GoodsPage implements ActionListener {
                 // 剩餘
                 gbc.gridx = 0;
                 gbc.gridy++;
-                JLabel remainingLabel = new JLabel("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
-                remainingLabel.setFont(labelFont);
-                OuterPanel.add(remainingLabel, gbc);
+                if(goods.remainingLabel == null)
+                {
+                    goods.remainingLabel = new JLabel("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
+                    goods.remainingLabel.setFont(labelFont);
+                }
+                else
+                {
+                    goods.remainingLabel.setText("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
+                }
+                
+                OuterPanel.add(goods.remainingLabel, gbc);
 
                 // 賣出數量選擇
                 gbc.gridx = 0;
