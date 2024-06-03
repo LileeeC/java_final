@@ -189,9 +189,9 @@ public class GoodsPage implements ActionListener {
                     }
 
                     OuterPanel = goods.display;
-                    for (Component comp : DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.getComponents()) {
+                    for (Component comp : DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.getComponents()) {
                         if (comp == OuterPanel) {
-                            DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.remove(comp);
+                            DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.remove(comp);
                             break;
                         }
                     }
@@ -367,9 +367,9 @@ public class GoodsPage implements ActionListener {
                 materialBtn.setFont(labelFont);
                 OuterPanel.add(materialBtn, gbc);
 
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.add(OuterPanel);
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.revalidate();
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.repaint();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.add(OuterPanel);
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.revalidate();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.repaint();
                 goods.Data = dialog;
                 dialog.setVisible(false);
             }
