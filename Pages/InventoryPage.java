@@ -32,6 +32,7 @@ public class InventoryPage implements ActionListener {
         titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
+        //中間內容的panel
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
             @Override
             public Dimension getPreferredSize() {

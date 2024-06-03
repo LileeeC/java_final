@@ -32,11 +32,12 @@ import src.DataStore;
 
 public class InventoryItemPage implements ActionListener {
   public static JPanel createInventoryItemPagePanel(String InventoryName) {
+    InventoryItemPage inventoryItemPage = new InventoryItemPage();
     JPanel mainPanel = new JPanel(new BorderLayout());
 
     // Create a new panel for the title and center it
       JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-      JLabel titleLabel = new JLabel("庫存點材料庫存");
+      JLabel titleLabel = new JLabel(InventoryName + "材料庫存");
       titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
       titlePanel.add(titleLabel);
       titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
@@ -73,7 +74,6 @@ public class InventoryItemPage implements ActionListener {
         return super.getPreferredSize();
       }
     };
-    InventoryItemPage inventoryItemPage = new InventoryItemPage();
 
     // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
     JScrollPane scrollPane = new JScrollPane(panel);
@@ -262,7 +262,9 @@ public class InventoryItemPage implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     String command = e.getActionCommand();
 
-    if ("Inventory Page".equals(command)) {
+    if ("Store Menu".equals(command)) {
+      DataStore.showStoreMenu(DataStore.MainFrame.getTitle());
+    } else if ("Inventory Page".equals(command)) {
       DataStore.showInventoryPage(command);
     }
   }
