@@ -4,6 +4,9 @@ package CommonClass;
 import java.util.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import Pages.InventoryItemPage;
 
 public class InventoryPoint {
     public String name;
@@ -11,9 +14,11 @@ public class InventoryPoint {
     public Map<String, InventoryItem> items = new HashMap<>();
     //打開不同庫存的觸發Button
     public Map<String, JButton> ButtonTrigger = new HashMap<>();
-    public JPanel PointPanel;
+    public JPanel PointPanel, PointsPanelParent;
 
-    public InventoryPoint() {
-        
+    public InventoryPoint(String PointName) {
+        name = PointName;
+        PointsPanelParent = InventoryItemPage.createInventoryItemPagePanel(PointName);
+        PointPanel = (JPanel)((JScrollPane)PointsPanelParent.getComponent(1)).getViewport().getView();
     }
 }

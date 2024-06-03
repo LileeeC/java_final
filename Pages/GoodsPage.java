@@ -13,7 +13,11 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+
 import CommonClass.Goods;
+import CommonClass.InventoryItem;
+import CommonClass.InventoryPoint;
 import CommonClass.Material;
 
 import java.awt.*;
@@ -27,9 +31,9 @@ public class GoodsPage implements ActionListener {
         // Create a new panel for the title and center it
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel("商品列表");
-        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titleLabel.setFont(new Font("新宋体", Font.BOLD, 40));
         titlePanel.add(titleLabel);
-        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
@@ -185,9 +189,9 @@ public class GoodsPage implements ActionListener {
                     }
 
                     OuterPanel = goods.display;
-                    for (Component comp : DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.getComponents()) {
+                    for (Component comp : DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.getComponents()) {
                         if (comp == OuterPanel) {
-                            DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.remove(comp);
+                            DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.remove(comp);
                             break;
                         }
                     }
@@ -288,6 +292,63 @@ public class GoodsPage implements ActionListener {
                 JButton soldBtn = new JButton("賣出");
                 soldBtn.setFont(labelFont);
                 OuterPanel.add(soldBtn, gbc);
+                soldBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        int value;
+                        try
+                        {
+                            value = Integer.parseInt(quantityField.getText());
+                        } 
+                        catch (NumberFormatException exception)
+                        {
+                            quantityField.setText("0");
+                            return;
+                        }
+
+                        if(value > goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())))
+                        {
+                            JOptionPane.showMessageDialog(DataStore.MainFrame, "商品數量不足", "錯誤", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                        for(int i = 0; i < goods.materials.size(); i++)
+                        {
+                            Material m = goods.materials.get(i);
+                            float needAmount = quantityField.getText().trim().isEmpty() ? 0 : (m.number *  value);
+                            for(Map.Entry<String, InventoryPoint> entry : DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.entrySet())
+                            {
+                                for(Map.Entry<String, InventoryItem> item : entry.getValue().items.entrySet())
+                                {
+                                    if(item.getKey().equals(m.name))
+                                    {
+                                        if(needAmount <= item.getValue().quantities)
+                                        {
+                                            item.getValue().quantities -= needAmount;
+                                            needAmount = 0;
+                                            item.getValue().remainJLabel.setText("剩餘: " + item.getValue().quantities);
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            needAmount -= item.getValue().quantities; 
+                                            item.getValue().quantities = 0;  
+                                            item.getValue().remainJLabel.setText("剩餘: " + item.getValue().quantities);
+                                        }
+                                    }
+                                }
+
+                                if(Math.abs(needAmount) <= 1e-6f)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        goods.remainingLabel.setText("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
+                    }
+                });
 
                 // 修改/查看
                 gbc.gridx = 0;
@@ -306,9 +367,9 @@ public class GoodsPage implements ActionListener {
                 materialBtn.setFont(labelFont);
                 OuterPanel.add(materialBtn, gbc);
 
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.add(OuterPanel);
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.revalidate();
-                DataStore.Stores.get(DataStore.MainFrame.getTitle()).StorePanel.repaint();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.add(OuterPanel);
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.revalidate();
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).GoodsPanel.repaint();
                 goods.Data = dialog;
                 dialog.setVisible(false);
             }

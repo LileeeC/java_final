@@ -86,7 +86,7 @@ public class DataStore {
             cardPanel.remove(goodsPagePanel);
         }
 
-        goodsPagePanel = Stores.get(MainFrame.getTitle()).StorePanel;
+        goodsPagePanel = Stores.get(MainFrame.getTitle()).GoodsPanelParent;
         goodsPagePanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(goodsPagePanel, "Goods Page");
         cardLayout.show(cardPanel, "Goods Page");
@@ -98,7 +98,7 @@ public class DataStore {
             cardPanel.remove(inventoryPagePanel);
         }
 
-        inventoryPagePanel = Stores.get(MainFrame.getTitle()).PointsPanel;
+        inventoryPagePanel = Stores.get(MainFrame.getTitle()).PointsPanelParent;
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
@@ -115,7 +115,7 @@ public class DataStore {
             cardPanel.remove(inventoryItemPagePanel);
         }
 
-        inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointPanel;
+        inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointsPanelParent;
         cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
         cardLayout.show(cardPanel, "Inventory Item Page");
     }
@@ -124,7 +124,7 @@ public class DataStore {
     public static JButton createCustomButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(300, 200));
-        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
+        button.setFont(new Font("微軟正黑體", Font.BOLD, 24));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(93, 55, 135));
         button.setBorder(BorderFactory.createCompoundBorder(
@@ -148,7 +148,7 @@ public class DataStore {
     public static JButton createAddButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(300, 200));
-        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
+        button.setFont(new Font("微軟正黑體", Font.BOLD, 24));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(24, 52, 89));
         button.setBorder(BorderFactory.createCompoundBorder(
@@ -172,7 +172,7 @@ public class DataStore {
     public static JButton createBackButton(String text, int width) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(width, 60));
-        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
+        button.setFont(new Font("微軟正黑體", Font.BOLD, 18));
         button.setForeground(Color.BLACK);
         button.setBackground(new Color(217, 180, 190));
         button.setBorder(BorderFactory.createCompoundBorder(
@@ -199,7 +199,7 @@ public class DataStore {
             Color hoverColor, Color borderColor, int borderWidth) {
         JButton button = new JButton(text);
         button.setPreferredSize(size);
-        button.setFont(new Font("Microsoft YaHei", Font.BOLD, 24));
+        button.setFont(new Font("微軟正黑體", Font.BOLD, 24));
         button.setForeground(textColor);
         button.setBackground(bgColor);
         button.setBorder(BorderFactory.createCompoundBorder(
@@ -218,5 +218,4 @@ public class DataStore {
 
         return button;
     }
-
 }

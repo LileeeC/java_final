@@ -37,10 +37,10 @@ public class InventoryItemPage implements ActionListener {
 
     // Create a new panel for the title and center it
       JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-      JLabel titleLabel = new JLabel(InventoryName + "材料庫存");
-      titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+      JLabel titleLabel = new JLabel("材料庫存");
+      titleLabel.setFont(new Font("新宋体", Font.BOLD, 40));
       titlePanel.add(titleLabel);
-      titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+      titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
       mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
     JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
@@ -85,7 +85,7 @@ public class InventoryItemPage implements ActionListener {
     //at the bottom
     JButton storeMenuButton = DataStore.createBackButton("返回", 130);
     storeMenuButton.addActionListener(inventoryItemPage);
-    storeMenuButton.setActionCommand("Store Menu");
+    storeMenuButton.setActionCommand("Inventory Page");
 
     JPanel bottomPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
     bottomPanelContainer.setBorder(new EmptyBorder(10, 0, 10, 0)); // Adding padding
@@ -213,7 +213,13 @@ public class InventoryItemPage implements ActionListener {
                 gbc.gridx = 0;
                 gbc.gridy++;
                 gbc.gridwidth = 2;
-                JLabel remainingLabel = new JLabel("剩餘: " + item.quantities);
+                JLabel remainingLabel = DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel;
+                if(remainingLabel == null)
+                {
+                  remainingLabel= new JLabel("剩餘: " + item.quantities);
+                  DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(item.name).remainJLabel = remainingLabel;
+                }
+
                 remainingLabel.setFont(labelFont);
                 OuterPanel.add(remainingLabel, gbc);
 

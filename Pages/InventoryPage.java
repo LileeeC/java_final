@@ -27,9 +27,9 @@ public class InventoryPage implements ActionListener {
         // Create a new panel for the title and center it
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel("材料庫存");
-        titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        titleLabel.setFont(new Font("新宋体", Font.BOLD, 40));
         titlePanel.add(titleLabel);
-        titlePanel.setBorder(new EmptyBorder(20, 0, 10, 0)); // Adding padding
+        titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
         //中間內容的panel
@@ -78,9 +78,7 @@ public class InventoryPage implements ActionListener {
                 if (buttonName != null && !buttonName.trim().isEmpty()
                         && !DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap
                                 .containsKey(buttonName)) {
-                    InventoryPoint point = new InventoryPoint();
-                    point.name = buttonName;
-                    point.PointPanel = InventoryItemPage.createInventoryItemPagePanel(point.name);
+                    InventoryPoint point = new InventoryPoint(buttonName);
                     point.ButtonTrigger.put(point.name, DataStore.createCustomButton(buttonName));
                     DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.put(buttonName, point);
                     panel.add(point.ButtonTrigger.get(point.name));
