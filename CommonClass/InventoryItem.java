@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InventoryItem {
+    public String id;
+    public String point_id;
     public float quantities = 0;
     public JButton ButtonTrigger;
     public String name = "";

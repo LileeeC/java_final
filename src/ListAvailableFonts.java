@@ -1,4 +1,4 @@
-package Pages;
+package src;
 
 import java.awt.GraphicsEnvironment;
 
