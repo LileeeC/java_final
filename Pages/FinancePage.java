@@ -42,10 +42,9 @@ public class FinancePage implements ActionListener {
         // Adding table
         String[] columnNames = { "日期", "項目", "收支" };
         Object[][] data = DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject;
-        
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);   
         JTable table = DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTable;
         if (table == null) {
-            DefaultTableModel model = new DefaultTableModel(data, columnNames);
             table = new JTable(model);
             DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTable = table;
         }

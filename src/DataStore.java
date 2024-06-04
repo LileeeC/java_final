@@ -4,6 +4,8 @@ package src;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import CommonClass.*;
 import Pages.*;
 
@@ -112,6 +114,10 @@ public class DataStore {
             cardPanel.remove(financeReportPanel);
         }
 
+        String[] columnNames = { "日期", "項目", "收支" };
+        Object[][] data = Stores.get(MainFrame.getTitle()).FinanceTableObject;
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        Stores.get(MainFrame.getTitle()).FinanceTable.setModel(model);
         financeReportPanel = Stores.get(MainFrame.getTitle()).FinancePanelParent;
         financeReportPanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(financeReportPanel, "Finance Report");
