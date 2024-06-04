@@ -33,7 +33,6 @@ public class MainMenu {
         titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
-
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 150, 100)) {
             @Override
             public Dimension getPreferredSize() {
@@ -80,6 +79,7 @@ public class MainMenu {
                     JButton ButtonTrigger = DataStore.createCustomButton(buttonName);
                     store.ButtonTrigger = ButtonTrigger;
                     store.name = buttonName;
+                    store.id = Database.getStoreId(store);
                     DataStore.StoresName.add(store.name);
                     DataStore.Stores.put(store.name, store);
                     panel.add(ButtonTrigger);

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Goods {
+  public String id;
+  public String store_id;
   public String name;
   public ArrayList<Material> materials;
   public int number;
@@ -39,23 +41,22 @@ public class Goods {
     this.cost = cost;
   }
 
-  public int RemainCalculate(Store store)
-  {
+  public int RemainCalculate(Store store) {
     Map<String, Float> materialTotals = new HashMap<>();
     for (Map.Entry<String, InventoryPoint> entry : store.InventoryPointMap.entrySet()) {
-        InventoryPoint point = entry.getValue();
-        for (Map.Entry<String, InventoryItem> itemEntry : point.items.entrySet()) {
-            String itemName = itemEntry.getKey();
-            InventoryItem item = itemEntry.getValue();
-            materialTotals.put(itemName, materialTotals.getOrDefault(itemName, 0f) + item.quantities);
-        }
+      InventoryPoint point = entry.getValue();
+      for (Map.Entry<String, InventoryItem> itemEntry : point.items.entrySet()) {
+        String itemName = itemEntry.getKey();
+        InventoryItem item = itemEntry.getValue();
+        materialTotals.put(itemName, materialTotals.getOrDefault(itemName, 0f) + item.quantities);
+      }
     }
 
-    int minGoods = (int)Float.MAX_VALUE;
+    int minGoods = (int) Float.MAX_VALUE;
     for (Material material : materials) {
-        float totalAvailable = materialTotals.getOrDefault(material.name, 0f);
-        int possibleGoods = (int)(totalAvailable / material.number);
-        minGoods = Math.min(minGoods, possibleGoods);
+      float totalAvailable = materialTotals.getOrDefault(material.name, 0f);
+      int possibleGoods = (int) (totalAvailable / material.number);
+      minGoods = Math.min(minGoods, possibleGoods);
     }
 
     return minGoods;

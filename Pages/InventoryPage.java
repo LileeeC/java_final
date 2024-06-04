@@ -19,11 +19,12 @@ import javax.swing.border.EmptyBorder;
 
 import CommonClass.InventoryPoint;
 import src.DataStore;
+import src.Database;
 
 public class InventoryPage implements ActionListener {
     public static JPanel createInventoryPagePanel() {
         JPanel mainPanel = new JPanel(new BorderLayout());
-        
+
         // Create a new panel for the title and center it
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel("材料庫存");
@@ -32,7 +33,7 @@ public class InventoryPage implements ActionListener {
         titlePanel.setBorder(new EmptyBorder(30, 0, 20, 0)); // Adding padding
         mainPanel.add(titlePanel, BorderLayout.PAGE_START);
 
-        //中間內容的panel
+        // 中間內容的panel
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 100)) {
             @Override
             public Dimension getPreferredSize() {
@@ -79,6 +80,8 @@ public class InventoryPage implements ActionListener {
                         && !DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap
                                 .containsKey(buttonName)) {
                     InventoryPoint point = new InventoryPoint(buttonName);
+                    Database.insertInventoryPoint(buttonName, DataStore.Stores.get(DataStore.MainFrame.getTitle()).id,
+                            point);
                     point.ButtonTrigger.put(point.name, DataStore.createCustomButton(buttonName));
                     DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.put(buttonName, point);
                     panel.add(point.ButtonTrigger.get(point.name));
@@ -96,7 +99,7 @@ public class InventoryPage implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(panel);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        //at the bottom
+        // at the bottom
         JButton storeMenuButton = DataStore.createBackButton("返回", 130);
         storeMenuButton.addActionListener(inventoryPage);
         storeMenuButton.setActionCommand("Store Menu");
