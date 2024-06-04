@@ -36,11 +36,11 @@ public class DataStore {
         cardPanel = new JPanel(cardLayout);
 
         // scroll bar
-        JScrollPane scroll = new JScrollPane(cardPanel);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // JScrollPane scroll = new JScrollPane(cardPanel);
+        // scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        // scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        MainFrame.add(scroll, BorderLayout.CENTER);
+        DataStore.MainFrame.add(cardPanel, BorderLayout.CENTER);
 
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
