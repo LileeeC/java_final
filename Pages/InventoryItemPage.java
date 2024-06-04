@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -234,6 +235,7 @@ public class InventoryItemPage implements ActionListener {
                     public void actionPerformed(ActionEvent e)
                     {
                         thisDialogName = item.name;
+                        productNumberField.setText("" + item.quantities);
                         DataStore.Stores.get(DataStore.MainFrame.getTitle()).InventoryPointMap.get(InventoryName).items.get(thisDialogName).Data.setVisible(true);
                     }
                 });
@@ -251,6 +253,9 @@ public class InventoryItemPage implements ActionListener {
                   int val = entry.getValue().RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle()));
                   entry.getValue().remainingLabel.setText("剩餘: " + val);
                 }
+
+                Object[] newLine = { LocalDate.now(), item.name + "*" + item.quantities, "-" + (item.singleCost * item.quantities)};
+                DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject = DataStore.Stores.get(DataStore.MainFrame.getTitle()).addRow(DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject, newLine);
             }
         });
 
