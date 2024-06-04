@@ -40,7 +40,7 @@ public class DataStore {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        DataStore.MainFrame.add(scroll, BorderLayout.CENTER);
+        MainFrame.add(scroll, BorderLayout.CENTER);
 
         // Add initial page's button
         mainMenuPanel = MainMenu.createMainMenuPanel();
@@ -77,8 +77,7 @@ public class DataStore {
     public static void showStoreMenu(String storeName) {
         MainFrame.setTitle(storeName);
         // cardPanel.add(storePagePanel, "Store Menu");
-        if(Stores.get(storeName).FinancePanelParent == null)
-        {
+        if (Stores.get(storeName).FinancePanelParent == null) {
             Stores.get(storeName).FinancePanelParent = FinancePage.createFinanceReportPanel();
         }
         cardLayout.show(cardPanel, "Store Menu");
@@ -96,6 +95,8 @@ public class DataStore {
         cardLayout.show(cardPanel, "Goods Page");
     }
 
+    public static Boolean isShowInventoryPage = false;
+
     public static void showInventoryPage(String command) {
         // cardPanel.add(inventoryPagePanel, "Inventory Page");
         if (inventoryPagePanel != null) {
@@ -106,6 +107,28 @@ public class DataStore {
         inventoryPagePanel.setBackground(Color.LIGHT_GRAY);
         cardPanel.add(inventoryPagePanel, "Inventory Page");
         cardLayout.show(cardPanel, "Inventory Page");
+
+        if (!isShowInventoryPage) {
+            isShowInventoryPage = true;
+            JPanel panel = Stores.get(MainFrame.getTitle()).PointsPanel;
+            // get initial inventory point list
+            Database.getInventoryPointList(Stores.get(MainFrame.getTitle()).id,
+                    Stores.get(MainFrame.getTitle()).InventoryPointMap);
+            for (Map.Entry<String, InventoryPoint> entry : Stores
+                    .get(MainFrame.getTitle()).InventoryPointMap.entrySet()) {
+                InventoryPoint point = entry.getValue();
+                System.out.println(point.name);
+                point.ButtonTrigger.put(point.name, createCustomButton(point.name));
+                Stores.get(MainFrame.getTitle()).InventoryPointMap.put(point.name, point);
+                panel.add(point.ButtonTrigger.get(point.name));
+                InventoryPage inventoryPage = new InventoryPage();
+                point.ButtonTrigger.get(point.name).addActionListener(inventoryPage);
+                point.ButtonTrigger.get(point.name).setActionCommand("Inventory Item Page");
+
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
     }
 
     public static void showFinanceReportPage() {
@@ -133,6 +156,16 @@ public class DataStore {
         inventoryItemPagePanel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointsPanelParent;
         cardPanel.add(inventoryItemPagePanel, "Inventory Item Page");
         cardLayout.show(cardPanel, "Inventory Item Page");
+
+        JPanel panel = Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).PointPanel;
+        // get initial inventory item list
+        Database.getInventoryItemList(Stores.get(MainFrame.getTitle()).id,
+                Stores.get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).items);
+        for (Map.Entry<String, InventoryItem> entry : Stores
+                .get(MainFrame.getTitle()).InventoryPointMap.get(buttonName).items.entrySet()) {
+            InventoryItem item = entry.getValue();
+            System.out.println(item.name);
+        }
     }
 
     // 最常見的按鈕，表示可以再點進去

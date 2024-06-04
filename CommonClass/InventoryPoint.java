@@ -11,7 +11,7 @@ import Pages.InventoryItemPage;
 public class InventoryPoint {
     public String id;
     public String name;
-    public int store_id;
+    public String store_id;
     // Sting代表材料名稱，不同名稱對應不同InventoryItem(材料庫存)
     public Map<String, InventoryItem> items = new HashMap<>();
     // 打開不同庫存的觸發Button

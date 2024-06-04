@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -95,6 +96,7 @@ public class InventoryPage implements ActionListener {
                 }
             }
         });
+
         // 將主內容面板放在 JScrollPane 中才不會把返回擠下去
         JScrollPane scrollPane = new JScrollPane(panel);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
