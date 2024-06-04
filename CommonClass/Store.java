@@ -32,4 +32,16 @@ public class Store {
         GoodsPanel = (JPanel) ((JScrollPane) GoodsPanelParent.getComponent(1)).getViewport().getView();
         PointsPanel = (JPanel) ((JScrollPane) PointsPanelParent.getComponent(1)).getViewport().getView();
     }
+
+    public Object[][] addRow(Object[][] original, Object[] newRow) {
+        Object[][] newArray = new Object[original.length + 1][];
+        
+        for (int i = 0; i < original.length; i++) {
+            newArray[i] = original[i];
+        }
+        
+        newArray[original.length] = newRow;
+        
+        return newArray;
+    }
 }
