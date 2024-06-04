@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Map;
 
 import CommonClass.Goods;
@@ -296,7 +297,7 @@ public class GoodsPage implements ActionListener {
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        int value;
+                        int value, earning;
                         try
                         {
                             value = Integer.parseInt(quantityField.getText());
@@ -347,6 +348,8 @@ public class GoodsPage implements ActionListener {
                         }
 
                         goods.remainingLabel.setText("剩餘: " + goods.RemainCalculate(DataStore.Stores.get(DataStore.MainFrame.getTitle())));
+                        Object[] newLine = { LocalDate.now(), goods.name + "*" + value, "+" + (goods.price * value)};
+                        DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject = DataStore.Stores.get(DataStore.MainFrame.getTitle()).addRow(DataStore.Stores.get(DataStore.MainFrame.getTitle()).FinanceTableObject, newLine);
                     }
                 });
 
