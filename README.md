@@ -32,3 +32,15 @@
 **DataStore**
 - 執行動作
 - 放大家共同使用的東西
+
+### database
+- 使用mysql
+- 帳號：root
+- 密碼：javafinalproject
+- 資料庫連接檔案在src/Database.java
+- 目前有接上前後端的功能：
+    - create store
+    - get store
+    - create inventory point
+    - get inventory point
+    - create inventory item
